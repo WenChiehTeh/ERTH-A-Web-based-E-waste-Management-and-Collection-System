@@ -2,7 +2,7 @@
 <link href="styles/login.css" rel="stylesheet">
 
     <body>
-        <form method="POST" action="/accountLogin">
+        <form method="POST" action="/login">
             <div class="loginContainer">
                 <div class="loginForm">
                     <div class="flexContainer">
@@ -17,11 +17,12 @@
                         <div class="formInput">
                             <div class="emailInput">
                                 <label for="email">Email</label>
-                                <p id="message"><%= locals.messageEmail %>Testing</p><br>
+                                <p id="message"><%= locals.messageEmail %></p><br>
                                 <input type="email" class="email" name="email" placeholder="Enter email" required><br><br>
                             </div>
                             <div class="passwordInput">
-                                <label for="password">Password</label><br>
+                                <label for="password">Password</label>
+                                <p id="message"><%= locals.messagePassword %></p><br>
                                 <input type="password" class="password" id="password" name="password" placeholder="Enter password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}" required><br><br>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import { insertUser } from "./controllers/authentication.js";
+import { checkPassword } from "./controllers/authentication.js";
 import dotenv from "dotenv"; 
 
 //Server configuration
@@ -11,7 +12,7 @@ const port = 3000;
 //load API keys
 dotenv.config();
 const googleMapsAPI = process.env.googleMapsAPI;
-const databasePassword = process.env.databasePassword;
+const databasePassword = process.env.databasePassowrd;
 
 //Database configuration
 const { Pool } = pg;
@@ -53,25 +54,31 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  //load data into memory
-  const email = req.body["email"];
-  const password = req.body["password"];
+  try {
+    const email = req.body["email"].toLowerCase();
+    const password = req.body["password"];
 
-  //query for existing user
-  const existingUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await checkPassword(email, password);
 
-  //check for existing user, then check for matching credentials
-  if (existingUser.rows.length == 0) {
-    const data = {
-      messageEmail : "This email isnt registered!"
-    };
-    res.render("login.ejs", data);
+    if (result == 0) {
+      res.render("login.ejs", { messageEmail: "This email isn't registered!" });
+    } else if (result == 1) {
+      const data = {
+        googleMapsAPI : googleMapsAPI
+      };
+      res.render("homePageLoggedIn.ejs", data);
+    } else {
+      res.render("login.ejs", { messagePassword: "Incorrect password!" });
+    }
+  } catch (error) {
+    console.error("Error in login:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 app.post("/registerAccount", async (req, res) => {
   //load data into memory
-  const email = req.body["email"];
+  const email = req.body["email"].toLowerCase();
   const password = req.body["password"];
   const retypePassword = req.body["retypePassword"];
 
