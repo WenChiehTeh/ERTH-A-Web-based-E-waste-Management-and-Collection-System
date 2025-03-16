@@ -4,6 +4,10 @@ import pg from "pg";
 import { insertUser } from "./controllers/authentication.js";
 import { checkPassword } from "./controllers/authentication.js";
 import dotenv from "dotenv"; 
+import session from "express-session";
+import passport from "passport";
+import { Strategy } from "passport-local";
+import bcrypt from "bcrypt";
 
 //Server configuration
 const app = express();
@@ -28,9 +32,64 @@ const pool = new Pool({
 export default pool;
 
 //Middleware
-app.use(express.json());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "SECRET",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60,
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+  new Strategy(
+    { usernameField: "email", passwordField: "password" },
+    async (email, password, cb) => {
+      try {
+        const getUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+
+        if (getUser.rows.length === 0) {
+          return cb(null, false, { message: "This email isn't registered!" });
+        }
+
+        const user = getUser.rows[0];
+        const storedPassword = user.password;
+
+        const isMatch = await bcrypt.compare(password, storedPassword);
+        if (!isMatch) {
+          return cb(null, false, { message: "Incorrect password!" });
+        }
+
+        return cb(null, user);
+      } catch (error) {
+        return cb(error);
+      }
+    }
+  )
+);
+
+// Serialize user
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Deserialize user
+passport.deserializeUser(async (id, done) => {
+  try {
+    const getUser = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    done(null, getUser.rows[0]);
+  } catch (error) {
+    done(error);
+  }
+});
 
 //Server initialization
 app.listen(port, () => {
@@ -39,21 +98,59 @@ app.listen(port, () => {
 
 //Server routes
 app.get("/", (req, res) => {
-  const data = {
-    googleMapsAPI : googleMapsAPI
-  };
-  res.render("homePage.ejs", data);
-});
+  console.log(req.user);
+  if (req.isAuthenticated()) {
+    const data = {
+      googleMapsAPI : googleMapsAPI
+    };
+    res.render("homePageLoggedIn.ejs", data);
+  } else {
+    res.redirect("/homepage");
+  }
+})
 
 app.get("/login", (req, res) => {
   res.render("login.ejs");
+});
+
+app.get("/loginFailedWrongPass", (req, res) => {
+  res.render("login.ejs", { messagePassword: "Incorrect password!" });
+});
+
+app.get("/loginFailedNotExist", (req, res) => {
+  res.render("login.ejs", { messageEmail: "Email does not exists!" });
 });
 
 app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
-app.post("/login", async (req, res) => {
+app.get("/homepage", (req, res) => {
+  const data = {
+    googleMapsAPI : googleMapsAPI
+  };
+  res.render("homePage.ejs", data);
+})
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      if (info.message === "Incorrect password!") {
+        return res.redirect("/loginFailedWrongPass");
+      } else if (info.message === "This email isn't registered!") {
+        return res.redirect("/loginFailedNotExist");
+      }
+      return res.redirect("/login");
+    }
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res.redirect("/");
+    });
+  })(req, res, next);
+});
+
+app.post("/loginNoSave", async (req, res) => {
   try {
     const email = req.body["email"].toLowerCase();
     const password = req.body["password"];
@@ -98,6 +195,6 @@ app.post("/registerAccount", async (req, res) => {
     res.render("register.ejs", data);
   } else {
       insertUser(email, password);
-      res.render("homePage.ejs");
+      res.redirect("/login");
   }
 });
