@@ -1,0 +1,81 @@
+<%- include("partials/header(login).ejs"); %>
+<link href="styles/login.css" rel="stylesheet">
+
+    <body>
+        <form method="POST" action="/accountLogin">
+            <div class="loginContainer">
+                <div class="loginForm">
+                    <div class="flexContainer">
+                        <div class="loginLogo">
+                            <div>
+                                <img src="/images/logo.png" height="100" id="logoLogin">
+                            </div>
+                        </div>
+                        <div class="loginHeader">
+                            <p id="header">Welcome back</p>
+                        </div>
+                        <div class="formInput">
+                            <div class="emailInput">
+                                <label for="email">Email</label>
+                                <p id="message"><%= locals.messageEmail %>Testing</p><br>
+                                <input type="email" class="email" name="email" placeholder="Enter email" required><br><br>
+                            </div>
+                            <div class="passwordInput">
+                                <label for="password">Password</label><br>
+                                <input type="password" class="password" id="password" name="password" placeholder="Enter password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}" required><br><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="togglePassword">
+                        <div>
+                            <label class="switch">
+                            <input type="checkbox" onclick="togglePassword()">
+                            <span class="slider round"></span>
+                        </label>
+                        </div>
+                        <div>
+                            <p id="showPass">
+                                Show password
+                            </p>
+                        </div>
+                    </div>
+                    <div class="togglePassword">
+                        <div>
+                            <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        </div>
+                        <div>
+                            <p id="showPass">
+                                Remember me
+                            </p>
+                        </div>
+                    </div>
+                    <div class="togglePassword">
+                        <div>
+                            <a href="/">
+                                <p id="showPass">
+                                    Forgot password?
+                                </p> 
+                            </a>
+                        </div>
+                    </div>
+                    <div class="submitBtn togglePassword upperBtn">
+                        <input type="submit" class="submit" value="Log In">
+                    </div>
+                    <hr \>
+                    <div class="submitBtn togglePassword upperBtn">
+                        <button type="button" class="submit google"><img src="/images/google.png" height= "40" \> Sign in with Google</button>
+                    </div>
+                    <hr \>
+                    <div class="registerDiv">
+                        <p class="register">Don't have an account? <a href="/register">Sign up now</a></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script src="/scripts/login.js"></script>
+    </body>
+
+<%- include("partials/footer.ejs"); %>

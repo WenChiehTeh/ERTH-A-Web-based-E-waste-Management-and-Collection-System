@@ -1,0 +1,84 @@
+<%- include("partials/header(login).ejs"); %>
+
+<link href="/styles/homepage.css" rel="stylesheet">
+
+<body>
+    <div class="px-4 py-5 text-center hero">
+        <div class="heroContent">
+            <h1 class="display-5 fw-bold text-body-emphasis heroTitle">Get Paid to Recycle Used Electronics Now!</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4 heroDesc">We offer FREE pickup from your address and pay cash rewards for your devices.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="heroButton">Yes, I want to recycle!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-4 py-5" id="featured-3">
+        <h2 class="pb-2 border-bottom featureHeader">Why Recycle With Us?</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+            <img class="features" src="images/briefcase.svg" alt="briefcase" height="75px">
+            </div>
+            <h3 class="fs-2 text-body-emphasis feature">Professional</h3>
+            <p class="paragraphF">ERTH Malaysia upholds the highest standards in e-waste management, ensuring a seamless and responsible recycling process. Our team operates with efficiency, transparency, and a strong commitment to environmental sustainability. By providing reliable collection services, secure data destruction, and proper recycling channels, they make it easy for individuals and businesses to dispose of electronic waste ethically.</p>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <img class="features" src="images/fast.svg" alt="bus" height="75px">
+            </div>
+            <h3 class="fs-2 text-body-emphasis feature">Countrywide</h3>
+            <p class="paragraphF">ERTH Malaysia offers e-waste collection services across the nation, making recycling accessible to everyone. Our wide coverage ensures that individuals and businesses can easily dispose of electronic waste, no matter where they are.</p>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <img class="features" src="images/gift.svg" alt="gift" height="75px">
+            </div>
+            <h3 class="fs-2 text-body-emphasis feature">Rewarding</h3>
+            <p class="paragraphF">ERTH Malaysia makes e-waste recycling beneficial by offering cash rewards for eligible items. Customers can earn money while reducing electronic waste, making the process both environmentally and financially rewarding.</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="pb-2 border-bottom featureHeader">Testimonials</h2>
+        <div class="row featurette">
+            <div class="col-md-7 testimonialDiv">
+              <h2 class="featurette-heading fw-normal lh-1">James Walker <span class="text-body-secondary">University Student</span></h2>
+              <p class="lead">"As a student, I often upgrade my gadgets, but I never knew what to do with my old devices. ERTH made it super easy to recycle my broken laptop and phone. The fact that I could earn some money while helping the environment was a huge plus! I’ll definitely use their service again."</p>
+            </div>
+            <div class="col-md-5">
+              <img src="images/testimonial1.png" class="testimonial fRight" height="300">
+            </div>
+        </div>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2 fRight">
+              <h2 class="featurette-heading fw-normal lh-1">Emily Johnson <span class="text-body-secondary">Eco-conscious Mother</span></h2>
+              <p class="lead">"I always worry about the environmental impact of electronic waste, but ERTH made it so easy to recycle my old gadgets. The process was hassle-free, and I felt good knowing my e-waste was being handled responsibly. Plus, getting paid for recycling was a great bonus!"</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="images/testimonial2.png" class="testimonial" height="300">
+            </div>
+        </div>
+        <div class="row featurette">
+            <div class="col-md-7 testimonialDiv">
+              <h2 class="featurette-heading fw-normal lh-1">Rajesh Kumar <span class="text-body-secondary">IT Professional</span></h2>
+              <p class="lead">"As someone who works in IT, I accumulate a lot of outdated tech. ERTH provided a seamless pickup service, saving me the trouble of finding a recycling center. Their transparency and commitment to proper disposal make them my go-to for e-waste recycling."</p>
+            </div>
+            <div class="col-md-5">
+              <img src="images/testimonial3.png" class="testimonial fRight" height="300">
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-4">
+        <h1 class="pb-2 border-bottom mapHeader">Our Loactions</h1>
+        <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxZzryjslFUa-jT4PijyXuYZyHlyfNopY&callback=initMap" async defer></script>
+        <script src="/scripts/homepage.js"></script>
+    </div>
+</body>
+
+<%- include("partials/footer.ejs"); %>
