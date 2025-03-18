@@ -1,4 +1,4 @@
-import pool from "../index.js";
+import pool from "../config/database.js";
 import bcrypt from "bcrypt";
 
 //Number of times to salt each password
