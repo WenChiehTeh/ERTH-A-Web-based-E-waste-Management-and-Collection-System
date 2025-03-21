@@ -165,6 +165,17 @@ footer {
     color: red;
 }
 
+.googleSign {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+
 @media only screen and (max-width: 1510px) {
 
     .loginContainer {

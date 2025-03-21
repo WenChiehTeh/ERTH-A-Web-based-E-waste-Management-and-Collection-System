@@ -6,13 +6,3 @@ function togglePassword() {
         element.type = "password";
     }
   }
-
-$(document).ready(function() {
-    $("#rememberMe").change(function() {
-        if ($(this).is(":checked")) {
-            $("#login").attr("action", "/login");
-        } else {
-            $("#login").attr("action", "/loginNoSave");
-        }
-    });
-});

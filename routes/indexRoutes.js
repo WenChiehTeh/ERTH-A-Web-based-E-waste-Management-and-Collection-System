@@ -11,7 +11,8 @@ router.get("/", (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
       const data = {
-        googleMapsAPI : googleMapsAPI
+        googleMapsAPI : googleMapsAPI,
+        points: req.user.points,
       };
       res.render("homePageLoggedIn.ejs", data);
     } else {

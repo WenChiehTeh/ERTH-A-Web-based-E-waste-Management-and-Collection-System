@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import passport from "../config/passportConfig.js";
-import { insertUser, checkPassword } from "../controllers/authentication.js";
+import { insertUser } from "../controllers/authentication.js";
 
 const router = express.Router();
 
@@ -9,59 +9,74 @@ const router = express.Router();
 dotenv.config();
 const googleMapsAPI = process.env.googleMapsAPI;
 
+//go to login page
 router.get("/login", (req, res) => {
     res.render("login.ejs");
 });
 
+//go to register page
 router.get("/register", (req, res) => {
     res.render("register.ejs");
 });
 
+//go to google OAuth page
+router.get("/auth/google", passport.authenticate("google", {
+  scope: ['profile', 'email'],
+}))
+
+//Result from OAuth page
+router.get("/auth/google/secrets", passport.authenticate("google", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+}))
+
+//login function
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    if (err) return next(err);
-    if (!user) {
-      if (info.message === "Incorrect password!") {
-        const data = {
-          messagePassword : "Incorrect password!"
-        };
-        return res.render("login.ejs", data);
-      } else if (info.message === "This email isn't registered!") {
-        const data = {
-          messageEmail : "Email is not registered!"
-        };
-        return res.render("login.ejs", data);
-      }
-      return res.redirect("/login");
+    if (err){
+      return next(err);
     }
+
+    if (!user) {
+      const data = {};
+      if (info.message === "Incorrect password!") {
+        data.messagePassword = "Incorrect password!";
+      } else if (info.message === "This email isn't registered!") {
+        data.messageEmail = "Email is not registered!";
+      }
+      return res.render("login.ejs", data);
+    } 
+
     req.logIn(user, (err) => {
-      if (err) return next(err);
+      if (err) {
+        return next(err);
+      }
+
+      if (req.body["rememberMe"] == "true") {
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
+      } else {
+        req.session.cookie.expires = false;
+      }
+
       return res.redirect("/");
     });
   })(req, res, next);
 });
 
-router.post("/loginNoSave", async (req, res) => {
-  try {
-    const email = req.body["email"].toLowerCase();
-    const password = req.body["password"];
-
-    const result = await checkPassword(email, password);
-
-    if (result == 0) {
-      res.render("login.ejs", { messageEmail: "This email isn't registered!" });
-    } else if (result == 1) {
-      const data = {
-        googleMapsAPI : googleMapsAPI
-      };
-      res.render("homePageLoggedIn.ejs", data);
-    } else {
-      res.render("login.ejs", { messagePassword: "Incorrect password!" });
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
     }
-  } catch (error) {
-    console.error("Error in login:", error);
-    res.status(500).send("Internal Server Error");
-  }
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).send("Error logging out");
+      }
+      res.clearCookie("connect.sid"); // Clear session cookie
+      res.redirect("/login"); // Redirect to login page
+    });
+  });
 });
 
 router.post("/registerAccount", async (req, res) => {

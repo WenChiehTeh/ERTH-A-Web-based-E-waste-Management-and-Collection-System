@@ -1,9 +1,15 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import GoogleStrategy from "passport-google-oauth2"
 import bcrypt from "bcrypt";
 import pool from "./database.js";
+import dotenv from "dotenv";
 
-passport.use(
+dotenv.config();
+const googleClientID = process.env.googleClientID;
+const googleClientSecret = process.env.googleClientSecret;
+
+passport.use("local",
   new LocalStrategy(
     { usernameField: "email", passwordField: "password" },
     async (email, password, done) => {
@@ -22,6 +28,32 @@ passport.use(
         return done(null, user);
       } catch (error) {
         return done(error);
+      }
+    }
+  )
+);
+
+passport.use(
+  "google", 
+  new GoogleStrategy( 
+    {
+      clientID: googleClientID,
+      clientSecret: googleClientSecret,
+      callbackURL: "http://localhost:3000/auth/google/secrets",
+      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+    }, 
+    async (accessToken, refreshToken, profile, cb) =>  {
+      console.log(profile);
+      try {
+        const result = await pool.query("SELECT * FROM users WHERE email = $1", [profile.email]);
+        if (result.rows.length == 0) {
+          const newUser = await pool.query("INSERT INTO users (email,password) VALUES ($1, $2)", [profile.email, "google"]);
+          cb(null, newUser.rows[0]);
+        } else {
+          cb(null, result.rows[0]);
+        }
+      } catch (err) {
+        cb(err);
       }
     }
   )

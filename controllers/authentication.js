@@ -21,28 +21,3 @@ export const insertUser = async (email, password) => {
     client.release();
   }
 };
-
-//Authenticate users
-export const checkPassword = async (email, loginPassword) => {
-  try {
-    const getUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-
-    if (getUser.rows.length === 0) {
-      return 0;
-    } else {
-      const user = getUser.rows[0];
-      const storedPassword = user.password;
-
-      const result = await bcrypt.compare(loginPassword, storedPassword);
-      
-      if (result) {
-        return 1;
-      } else {
-        return 2;
-      }
-    }
-  } catch (error) {
-    console.error("Error checking password:", error);
-    return -1;
-  }
-};

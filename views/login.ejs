@@ -2,7 +2,7 @@
 <link href="styles/login.css" rel="stylesheet">
 
     <body>
-        <form method="POST" action="/loginNoSave" id="login">
+        <form method="POST" action="/login" id="login">
             <div class="loginContainer">
                 <div class="loginForm">
                     <div class="flexContainer">
@@ -43,7 +43,7 @@
                     <div class="togglePassword">
                         <div>
                             <label class="switch">
-                            <input type="checkbox" id="rememberMe">
+                            <input type="checkbox" id="rememberMe" name="rememberMe" value="true">
                             <span class="slider round"></span>
                         </label>
                         </div>
@@ -67,7 +67,12 @@
                     </div>
                     <hr \>
                     <div class="submitBtn togglePassword upperBtn">
-                        <button type="button" class="submit google"><img src="/images/google.png" height= "40" \> Sign in with Google</button>
+                        <a type="button" class="submit google" href="/auth/google">
+                            <div class="googleSign">
+                                <img src="/images/google.png" height= "40" \> 
+                                Sign in with Google
+                            </div>
+                        </a>
                     </div>
                     <hr \>
                     <div class="registerDiv">
