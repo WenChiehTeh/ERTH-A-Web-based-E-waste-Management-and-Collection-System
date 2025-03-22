@@ -43,6 +43,8 @@ router.post("/login", (req, res, next) => {
         data.messagePassword = "Incorrect password!";
       } else if (info.message === "This email isn't registered!") {
         data.messageEmail = "Email is not registered!";
+      } else if(info.messagePassword = "Google Auth") {
+        data.messageEmail = "Email is registered using Google";
       }
       return res.render("login.ejs", data);
     } 
@@ -73,8 +75,8 @@ router.get("/logout", (req, res) => {
         console.error("Error destroying session:", err);
         return res.status(500).send("Error logging out");
       }
-      res.clearCookie("connect.sid"); // Clear session cookie
-      res.redirect("/login"); // Redirect to login page
+      res.clearCookie("connect.sid");
+      res.redirect("/homepage");
     });
   });
 });
