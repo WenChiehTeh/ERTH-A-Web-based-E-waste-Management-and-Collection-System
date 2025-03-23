@@ -1,0 +1,36 @@
+<%- include("partials/header.ejs"); %>
+<link href="/styles/makeCollectionRequest.css" rel="stylesheet">
+
+<body>
+    <div class="outer"> 
+        <form id="recycleForm" action="/submitCollection" method="POST">
+            <div class="flexContainer">
+                <div class="formContainer">
+                    <div class="title">
+                        <p class="title1">Step 1</p>
+                        <p class="title2">Enter items to recycle</p>
+                    </div>
+                </div>
+                <div id="testContainer">
+                    <label class="left">Item</label>
+                    <label class="right">Qty</label><br>
+                    <div class="item" >
+                        <select id="item1" onchange="updateDropdowns()" name="item" required>
+                            <option value="">--SELECT--</option>
+                        </select>
+                        <input type="number" min="1" class="qty" name="quantity" placeholder="1" required>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="addItem" id="addItemBtn">Add Item</button>
+                    <button type="submit" class="submit">Submit</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <script src="/scripts/makeCollectionReuest.js"></script>
+</body>
+
+<%- include("partials/footer.ejs"); %>

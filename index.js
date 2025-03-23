@@ -4,6 +4,7 @@ import session from "express-session";
 import passport from "./config/passportConfig.js";
 import indexRoutes from "./routes/indexRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import requestRoutes from "./routes/requestRoutes.js";
 
 //Server configuration
 const app = express();
@@ -36,3 +37,4 @@ app.listen(port, () => {
 //Server routes
 app.use(indexRoutes);
 app.use(authRoutes);
+app.use(requestRoutes);

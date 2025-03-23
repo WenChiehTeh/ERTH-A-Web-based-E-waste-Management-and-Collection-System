@@ -44,6 +44,10 @@
     background-color: #FFCF50;
 }
 
+#home {
+    color:rgb(33,37,31) !important;
+}
+
 body {
     background-image: linear-gradient(to right, #FEFAE0, #A4B465);
     display: flex;
