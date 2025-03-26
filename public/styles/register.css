@@ -128,8 +128,13 @@ a, showPass {
     font-family: "Inter", sans-serif;
     color: white;
     background-color: rgb(13, 110, 253);
+    transition: background-color 0.3s ease;
     border: none;
     border-radius: 10px;
+}
+
+.submit:hover {
+    background-color: rgb(0, 73, 184);
 }
 
 .google {

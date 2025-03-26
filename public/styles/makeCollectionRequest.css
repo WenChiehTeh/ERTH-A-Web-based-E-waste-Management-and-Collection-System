@@ -18,7 +18,6 @@ body {
 form {
     width: 20vw;
     min-width: 300px;
-    min-height: 40vh;
     margin: auto;
     border-radius: 25px;
     margin-top: 45px;
@@ -30,7 +29,6 @@ form {
 
 .formContainer {
     width: 100%;
-    margin-top: 40px;
 }
 
 .title1, .title2 {
@@ -76,7 +74,7 @@ select {
     justify-content: space-between;
 }
 
-.addItem, .submit {
+.addItem, .submit, .next, .back {
     width: 100%;
     height: 50px;
     border: none;
@@ -89,6 +87,10 @@ select {
     font-family: "Inter", sans-serif;
 }
 
+.next, .back {
+    margin: 10px 0px 20px 0px;
+}
+
 .addItem:hover, .submit:hover {
     background-color: #A4B465;
 }
@@ -99,4 +101,88 @@ select {
 
 .submit {
 margin-bottom: 30px;
+}
+
+.extra {
+    width: 65%;
+}
+
+.delete {
+    width: 11%;
+    margin: 10px 0px;
+    padding: 0;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.delete:hover {
+    background-color: #ff5a5a;
+}
+
+#detailsForm, #paymentForm, #itemForm, #dateForm {
+    padding-top: 20px;
+}
+
+input, select{
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#date {
+    margin-bottom: 10px;
+    width: 100%
+}
+
+#state {
+    width: 100%;
+}
+
+.nameDiv, .areaDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textInput {
+    width: 90%;
+    max-width: 120%;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.address {
+    width: 100%;
+}
+
+.paymentLabel, .textInput {
+    margin-top: 10px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 40px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.paymentLabel {
+    padding: 10px 20px;
+    border: 2px solid grey;
+    background-color: #A4B465;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:checked + .paymentLabel {
+    background-color: #626F47;
+    color: white;
 }

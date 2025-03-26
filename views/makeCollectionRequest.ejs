@@ -3,8 +3,8 @@
 
 <body>
     <div class="outer"> 
-        <form id="recycleForm" action="/submitCollection" method="POST">
-            <div class="flexContainer">
+        <form id="recycleForm" action="/paymentCard" method="POST">
+            <div id="itemForm" class="recycleForm">
                 <div class="formContainer">
                     <div class="title">
                         <p class="title1">Step 1</p>
@@ -18,15 +18,121 @@
                         <select id="item1" onchange="updateDropdowns()" name="item" required>
                             <option value="">--SELECT--</option>
                         </select>
-                        <input type="number" min="1" class="qty" name="quantity" placeholder="1" required>
+                        <input type="number" min="1" class="qty" name="quantity" value="1" required>
                     </div>
                 </div>
                 <div class="buttons">
                     <button type="button" class="addItem" id="addItemBtn">Add Item</button>
-                    <button type="submit" class="submit">Submit</button>
+                    <button type="button" class="next" id="itemNext">Next</button>
                 </div>
-
             </div>
+            <div id="dateForm">
+                <div class="formContainer">
+                    <div class="title">
+                        <p class="title1">Step 2</p>
+                        <p class="title2">Pick collection date</p>
+                    </div>
+                    <div>
+                        <label for="date">Collection date :</label><br>
+                        <input class="textInput" type="date" id="date" name="date">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="back" id="dateBack">Back</button>
+                        <button type="button" class="next" id="dateNext">Next</button>
+                    </div>
+                </div>
+            </div>
+            <div id="detailsForm">
+                <div class="formContainer">
+                    <div class="title">
+                        <p class="title1">Step 3</p>
+                        <p class="title2">Enter personal details</p>
+                    </div>
+                </div>
+                <div id="testContainer">
+                    <div class="nameDiv">
+                        <div>
+                            <label>First name:</label><br>
+                            <input class="textInput" id="firstName" type="text" placeholder="First Name" name="firstName" required>
+                        </div>
+                        <div>
+                            <label>Last name:</label><br>
+                            <input class="textInput" id="lastName" type="text" placeholder="Last Name" name="lastName" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Phone number:</label><br>
+                        <input class="textInput address" id="phoneNo" type="tel" placeholder="Phone Number (e.g. 012-456789)" name="phoneNo" pattern="[0-9]{3}-([0-9]{7}|[0-9]{8})" required>
+                    </div>
+                    <div>
+                        <label>Address line 1</label><br>
+                        <input class="textInput address" id="addressLine1" type="text" placeholder="Address Line 1" name="addressLine1" required>
+                    </div>
+                    <div>
+                        <label>Address line 2:</label><br>
+                        <input class="textInput address" id="addressLine2" type="text" placeholder="Address Line 2 (Optional)" name="addressLine2">
+                    </div>
+                    <div class="areaDiv">
+                        <div>
+                            <label>Postcode:</label><br>
+                            <input class="textInput" id="postcode" type="number" placeholder="Postcode" name="postcode" required>
+                        </div>
+                        <div>
+                            <label>Area:</label><br>
+                            <input class="textInput" id="area" type="text" placeholder="Area" name="area" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label>State:</label><br>
+                        <select name="state" id="state" required>
+                            <option value="">--SELECT--</option>
+                            <option value="Johor">Johor</option>
+                            <option value="Kedah">Kedah</option>
+                            <option value="Kelantan">Kelantan</option>
+                            <option value="Malacca">Malacca</option>
+                            <option value="Negeri Sembilan">Negeri Sembilan</option>
+                            <option value="Pahang">Pahang</option>
+                            <option value="Penang">Penang</option>
+                            <option value="Perak">Perak</option>
+                            <option value="Perlis">Perlis</option>
+                            <option value="Sabah">Sabah</option>
+                            <option value="Sarawak">Sarawak</option>
+                            <option value="Selangor">Selangor</option>
+                            <option value="Terengganu">Terengganu</option>
+                            <option value="WP Kuala Lumpu">WP Kuala Lumpur</option>
+                            <option value="WP Labuan">WP Labuan</option>
+                            <option value="WP Putrajaya">WP Putrajaya</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="buttons">
+                    <button type="button" class="back" id="detailsBack">Back</button>
+                    <button type="button" class="next" id="detailsNext" >Next</button>
+                </div>
+            </div>
+            <div id="paymentForm" class="recycleForm">
+                <div class="formContainer">
+                    <div class="title">
+                        <p class="title1">Step 4</p>
+                        <p class="title2">Choose payment method</p>
+                    </div>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="Credit/Debit Card" name="payment" value="card">
+                    <label class="paymentLabel" for="Credit/Debit Card">Credit/Debit Card</label>
+            
+                    <input type="radio" id="FPX Bank Transfer" name="payment" value="FPX Bank Transfer">
+                    <label class="paymentLabel" for="FPX Bank Transfer">FPX Bank Transfer</label>
+            
+                    <input type="radio" id="GrabPay" name="payment" value="grabpay">
+                    <label class="paymentLabel" for="GrabPay">GrabPay</label>
+
+                    <input type="radio" id="Points" name="payment" value="points" onclick="setRoute('/paymentPoints')">
+                    <label class="paymentLabel" for="Points" onclick="setRoute('/paymentPoints')">Points (1000 pts)</label>
+                </div>
+                <button type="submit" class="next" id="paymentBack" >Back</button>
+                <button type="submit" class="next" id="detailsNext" >Make Payment</button>
         </form>
     </div>
 
