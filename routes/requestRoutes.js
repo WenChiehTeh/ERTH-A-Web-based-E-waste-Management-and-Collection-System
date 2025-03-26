@@ -56,15 +56,26 @@ router.post("/paymentCard", async (req, res) => {
                 cancel_url: "http://localhost:3000/cardPaymentFail",
             });
 
-            const insertRequest = await pool.query("INSERT INTO collectionRequests(sessionId, date, firstName, lastName, phoneNo, address, state, status, userId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id", [session.id, date, firstName, lastName, phoneNo, addressSQL, state, "payment", req.user.id]);
+            //try to insert new row in database
+            try {
+                //query to insert into collection request
+                const insertRequest = await pool.query("INSERT INTO collectionRequests(sessionId, date, firstName, lastName, phoneNo, address, state, status, userId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id", [session.id, date, firstName, lastName, phoneNo, addressSQL, state, "payment", req.user.id]);
 
-            const id = insertRequest.rows[0].id; 
+                //save the auto incremented id into memory
+                const id = insertRequest.rows[0].id; 
 
-            for (var i = 0; i < item.length; i++) {
-                const insertItems = await pool.query("INSERT INTO collectionRequestsItems(item, quantity, requestId) VALUES ($1, $2, $3)", [item[i], quantity[i], id])
-            } 
+                const updatePoints = await pool.query("UPDATE users SET points = points + 200 WHERE id = $1", [req.user.id]);
 
-            //redirect user to payment gateway
+                //insert each item into collection request items
+                for (var i = 0; i < item.length; i++) {
+                    const insertItems = await pool.query("INSERT INTO collectionRequestsItems(item, quantity, requestId) VALUES ($1, $2, $3)", [item[i], quantity[i], id])
+                } 
+            } catch (e) {
+                //catch any errors
+                console.error("Error inserting new collection request:", e);
+            }
+
+            //redirect user to stripe payment gateway
             res.redirect(session.url);
         } else {
             //if user address is rejected by Google Maps API

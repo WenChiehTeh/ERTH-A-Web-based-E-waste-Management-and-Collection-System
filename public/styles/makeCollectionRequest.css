@@ -91,7 +91,7 @@ select {
     margin: 10px 0px 20px 0px;
 }
 
-.addItem:hover, .submit:hover {
+.addItem:hover, .submit:hover, .next:hover, .back:hover {
     background-color: #A4B465;
 }
 
@@ -180,6 +180,11 @@ input[type="radio"] {
     cursor: pointer;
     font-size: 16px;
     transition: all 0.2s ease;
+}
+
+input[type="radio"]:hover + .paymentLabel {
+    background-color: #626F47;
+    color: white;
 }
 
 input[type="radio"]:checked + .paymentLabel {

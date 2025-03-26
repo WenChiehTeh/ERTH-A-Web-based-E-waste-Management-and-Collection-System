@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import passport from "../config/passportConfig.js";
 import { insertUser } from "../controllers/authentication.js";
+import pool from "../config/database.js";
 
 const router = express.Router();
 

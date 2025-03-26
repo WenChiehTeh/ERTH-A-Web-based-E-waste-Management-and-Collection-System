@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS public.collectionrequests
     address TEXT,
     state TEXT,
     status TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
     userID INT,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
 )
