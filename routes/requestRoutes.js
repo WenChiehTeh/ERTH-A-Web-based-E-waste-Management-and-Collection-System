@@ -52,8 +52,8 @@ router.post("/paymentCard", async (req, res) => {
                     },
                     quantity: 1
                 }],
-                success_url: `http://localhost:3000/cardPaymentSuccess?session_id={CHECKOUT_SESSION_ID}`,
-                cancel_url: "http://localhost:3000/cardPaymentFail",
+                success_url: `http://localhost:3000/cardSuccess?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: "http://localhost:3000/responses/cardFail",
             });
 
             //try to insert new row in database
@@ -79,7 +79,10 @@ router.post("/paymentCard", async (req, res) => {
             res.redirect(session.url);
         } else {
             //if user address is rejected by Google Maps API
-            res.status(400).send("This is not a valid address!");
+            const data = {
+                message : "address",
+            };
+            res.render("responses/requestFailed.ejs", data);
         }
     } catch (e) {
         //catch any errors when making payment
@@ -88,10 +91,38 @@ router.post("/paymentCard", async (req, res) => {
     }
 });
 
-router.get("/cardPaymentFail", (req, res) => {
-    res.send("Payment Failed")
+router.get("/cardFail", (req, res) => {
+    res.render("responses/requestFailed.ejs");
 });
 
+router.post("/update-payment-status", async (req, res) => {
+    const { session_id } = req.body;
+
+    if (!session_id) {
+        return res.status(400).json({ error: "Missing session ID" });
+    }
+
+    try {
+        const result = await pool.query(
+            "UPDATE collectionRequests SET status = $1 WHERE sessionId = $2 RETURNING *",
+            ["pending", session_id]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Session ID not found" });
+        }
+
+        res.json({ success: true, redirectUrl: "/cardSuccess" });
+
+    } catch (error) {
+        console.error("Database update error:", error);
+        res.status(500).json({ error: "Database error" });
+    }
+});
+
+router.get("/cardSuccess", (req, res) => {
+    res.render("responses/paymentSuccess.ejs");
+});
 
 export default router;
 

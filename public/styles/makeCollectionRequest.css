@@ -47,6 +47,7 @@ label {
     font-size: 1rem;
     font-weight: 250;
     font-family: "Inter", sans-serif;
+    margin-top: 10px;
 }
 
 .right {
@@ -190,4 +191,8 @@ input[type="radio"]:hover + .paymentLabel {
 input[type="radio"]:checked + .paymentLabel {
     background-color: #626F47;
     color: white;
+}
+
+#errorPayment {
+    color: red;
 }

@@ -1,0 +1,104 @@
+body {
+    /* background-image: linear-gradient(to right, #FEFAE0, #A4B465); */
+    background-image: url("../images/login2.png"), url('../images/E-waste2.png');;
+    background-color: rgba(255,255,255,0.3);
+    background-blend-mode: lighten;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.loginContainer {
+    width: 60vw;
+    height: 78vh;
+    margin: auto;
+    border-radius: 20px;
+    margin: 50px auto;
+    background-color: #FEFAE0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 15vw;
+    min-width: 5vw;
+    height: 15vw;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cross {
+    width: 20vw;
+    min-width: 10vw;
+    height: 20vh;
+    filter: brightness(0) invert(1);
+}
+
+
+.errorMessage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+p {
+    font-size: 2.25rem;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
+
+.errorBtn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    width: 40%;
+    height: 75px;
+    border: none;
+    border-radius: 15px;
+    background-color: #626F47;
+    transition: background-color 0.3s ease;
+    margin: 25px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    cursor: pointer; /* Ensures it looks like a button */
+}
+
+/* Ensure the hover effect applies correctly */
+.button:hover {
+    background-color: #A4B465;
+}
+
+/* Remove default link styles */
+.button-link {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
+
+.button-link {
+    width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+    p {
+        font-size: 1rem;
+    }
+
+    .button {
+        width: 60%;
+        font-size: 1rem;
+    }
+  }

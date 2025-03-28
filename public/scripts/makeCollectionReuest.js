@@ -174,6 +174,23 @@ $("#detailsNext").on("click", function (event) {
     }
 });
 
+$(".submit").on("click", function (event) {
+    event.preventDefault();
+
+    var isPageValid = true;
+  
+    const element = $("#Credit\\/Debit\\ Card")
+    const domElement = element[0];
+  
+    if (!domElement.checkValidity()) {
+        console.log(!domElement.checkValidity());
+        isPageValid = false;
+        $("#errorPayment").html("Please choose a payment method!");
+      } else {
+        $("form").submit();
+      }
+});
+
 //button to go from payment page back to details page
 $("#paymentBack").on("click", function (event) {
     event.preventDefault();

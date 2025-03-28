@@ -1,0 +1,23 @@
+<%- include("../partials/header(login).ejs"); %>
+<link href="styles/requestSuccess.css" rel="stylesheet">
+
+    <body>
+        <div class="loginContainer">
+            <div class="circle">
+                <svg class="tick" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12L10 18L20 6" stroke="white" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+                </svg>
+            </div>
+            <div class="errorMessage" >
+                    <p>Collection request has been successfully made, please wait for confirmation</p>
+            </div>
+            <div class="errorBtn">
+                <a href="/" class="button-link">
+                    <button class="button">Back to homepage</button>
+                </a>
+            </div>
+        </div>
+        <script src="/scripts/login.js"></script>
+    </body>
+
+<%- include("../partials/footer.ejs"); %>

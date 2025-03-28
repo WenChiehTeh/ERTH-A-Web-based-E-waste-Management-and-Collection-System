@@ -20,11 +20,18 @@ router.get("/", (req, res) => {
     }
 })
 
+// router.get("/homepage", (req, res) => {
+//   const data = {
+//     googleMapsAPI : googleMapsAPI
+//   };
+//   res.render("responses/requestSuccess.ejs", data);
+// })
+
 router.get("/homepage", (req, res) => {
     const data = {
       googleMapsAPI : googleMapsAPI
     };
-    res.render("homePage.ejs", data);
+    res.render("homepage.ejs", data);
 })
 
 export default router;

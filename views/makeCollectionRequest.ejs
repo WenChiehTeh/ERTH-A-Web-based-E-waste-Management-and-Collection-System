@@ -118,21 +118,24 @@
                         <p class="title2">Choose payment method</p>
                     </div>
                 </div>
+                <p id="errorPayment"></p>
                 <div class="radio-group">
-                    <input type="radio" id="Credit/Debit Card" name="payment" value="card">
+                    <input type="radio" id="Credit/Debit Card" name="payment" value="card" required>
                     <label class="paymentLabel" for="Credit/Debit Card">Credit/Debit Card</label>
             
-                    <input type="radio" id="FPX Bank Transfer" name="payment" value="FPX Bank Transfer">
+                    <input type="radio" id="FPX Bank Transfer" name="payment" value="FPX Bank Transfer" required>
                     <label class="paymentLabel" for="FPX Bank Transfer">FPX Bank Transfer</label>
             
-                    <input type="radio" id="GrabPay" name="payment" value="grabpay">
+                    <input type="radio" id="GrabPay" name="payment" value="grabpay" required>
                     <label class="paymentLabel" for="GrabPay">GrabPay</label>
 
-                    <input type="radio" id="Points" name="payment" value="points" onclick="setRoute('/paymentPoints')">
-                    <label class="paymentLabel" for="Points" onclick="setRoute('/paymentPoints')">Points (1000 pts)</label>
+                    <% if ((locals.points) >= 1000) { %>
+                        <input type="radio" id="Points" name="payment" value="points" onclick="setRoute('/paymentPoints')">
+                        <label class="paymentLabel" for="Points" onclick="setRoute('/paymentPoints')">Points (1000 pts)</label>
+                    <% } %>
                 </div>
                 <button type="submit" class="next" id="paymentBack" >Back</button>
-                <button type="submit" class="next" id="detailsNext" >Make Payment</button>
+                <button type="submit" class="next submit" id="detailsNext" >Make Payment</button>
             </div>
         </form>
     </div>
