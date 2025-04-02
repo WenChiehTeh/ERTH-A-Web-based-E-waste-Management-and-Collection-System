@@ -174,6 +174,7 @@ $("#detailsNext").on("click", function (event) {
     }
 });
 
+//checks if user has chosen a payment method
 $(".submit").on("click", function (event) {
     event.preventDefault();
 

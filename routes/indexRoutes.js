@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv"; 
+import pool from "../config/database.js";
 
 const router = express.Router();
 
@@ -20,13 +21,6 @@ router.get("/", (req, res) => {
     }
 })
 
-// router.get("/homepage", (req, res) => {
-//   const data = {
-//     googleMapsAPI : googleMapsAPI
-//   };
-//   res.render("responses/requestSuccess.ejs", data);
-// })
-
 router.get("/homepage", (req, res) => {
     const data = {
       googleMapsAPI : googleMapsAPI
@@ -35,3 +29,5 @@ router.get("/homepage", (req, res) => {
 })
 
 export default router;
+
+const test = pool.query("")

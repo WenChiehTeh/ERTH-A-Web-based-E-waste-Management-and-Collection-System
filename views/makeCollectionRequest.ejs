@@ -120,13 +120,13 @@
                 </div>
                 <p id="errorPayment"></p>
                 <div class="radio-group">
-                    <input type="radio" id="Credit/Debit Card" name="payment" value="card" required>
+                    <input type="radio" id="Credit/Debit Card" name="payment" value="card" onclick="setRoute('/paymentCard')" required>
                     <label class="paymentLabel" for="Credit/Debit Card">Credit/Debit Card</label>
             
-                    <input type="radio" id="FPX Bank Transfer" name="payment" value="FPX Bank Transfer" required>
+                    <input type="radio" id="FPX Bank Transfer" name="payment" value="FPX Bank Transfer" onclick="setRoute('/paymentCard')" required>
                     <label class="paymentLabel" for="FPX Bank Transfer">FPX Bank Transfer</label>
             
-                    <input type="radio" id="GrabPay" name="payment" value="grabpay" required>
+                    <input type="radio" id="GrabPay" name="payment" value="grabpay" onclick="setRoute('/paymentCard')" required>
                     <label class="paymentLabel" for="GrabPay">GrabPay</label>
 
                     <% if ((locals.points) >= 1000) { %>
