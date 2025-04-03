@@ -1,0 +1,49 @@
+<%- include("partials/header.ejs"); %>
+<link href="styles/pendingRequests.css" rel="stylesheet">
+
+<body>
+    <div class="collectionRequestsContainer container">
+        <div class="row my-4">
+          <div class="bar col-lg-3">
+            <div class="barFlex">
+                <a href="/viewCollectionRequests" class="barItem itemText">Upcoming Requests</a>
+                <a class="barItem itemText current">Pending Requests</a>
+                <a href="/" class="barItem itemText">Pending Reschedule Requests</a>
+                <a href="/" class="barItem itemText">Past Requests</a>
+            </div>
+          </div>
+          <div class="list col-lg-9" id="list">
+            <div class="listItem">
+              <div class="collectionDesc" id="id">ID: 1</div>
+              <div class="collectionDesc span2">Name: </div>
+              <div class="collectionDesc span2">Date: </div>
+              <div class="collectionDesc span2">Phone no.:</div>
+              <div class="collectionDesc span2">Address: </div>
+              <button class="viewItemBtn">View Items</button>
+            </div>
+            <div class="row my-4 slider">
+              <button class="sliderBtns" id="next">Next</button>
+              <button class="sliderBtns" id="back">Back</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+          <h2 class="modal-header">Items</h2>
+          <table id="item-table">
+              <thead>
+                  <tr>
+                      <th>Item</th>
+                      <th>Quantity</th>
+                  </tr>
+              </thead>
+              <tbody id="item-list"></tbody>
+          </table>
+          <button id="close-modal" class="close-btn">Close</button>
+      </div>
+  </div>
+    <script src="scripts/collectionRequestsUpcoming.js"></script>
+</body>
+
+<%- include("partials/footer.ejs"); %>

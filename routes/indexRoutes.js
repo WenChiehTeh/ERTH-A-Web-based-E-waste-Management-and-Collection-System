@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
     }
 })
 
-router.get("/homepage", (req, res) => {
+router.get("/homepage", async (req, res) => {
     const data = {
       googleMapsAPI : googleMapsAPI
     };
@@ -29,5 +29,3 @@ router.get("/homepage", (req, res) => {
 })
 
 export default router;
-
-const test = pool.query("")

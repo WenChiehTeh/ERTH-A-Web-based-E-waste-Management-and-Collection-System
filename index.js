@@ -5,6 +5,7 @@ import passport from "./config/passportConfig.js";
 import indexRoutes from "./routes/indexRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
+import viewRequests from "./routes/viewRequests.js";
 import { deleteOldPendingPayments } from "./controllers/paymentHandling.js"
 
 //Server configuration
@@ -46,3 +47,4 @@ app.listen(port, () => {
 app.use(indexRoutes);
 app.use(authRoutes);
 app.use(requestRoutes);
+app.use(viewRequests);

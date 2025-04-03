@@ -25,7 +25,7 @@ router.get("/makeCollectionRequest", (req, res) => {
 router.post("/paymentCard", async (req, res) => {
     try {
         //load all the items into memory
-        const { item, quantity, date, firstName, lastName, phoneNo, addressLine1, addressLine2, postcode, area, state, payment } = req.body;
+        var { item, quantity, date, firstName, lastName, phoneNo, addressLine1, addressLine2, postcode, area, state, payment } = req.body;
         var paymentMethod = [];
         paymentMethod.push(payment);
 
@@ -65,6 +65,12 @@ router.post("/paymentCard", async (req, res) => {
                 const id = insertRequest.rows[0].id; 
 
                 const updatePoints = await pool.query("UPDATE users SET points = points + 200 WHERE id = $1", [req.user.id]);
+
+                // If the item is a single value (not an array), make it an array
+                if (!Array.isArray(item)) {
+                    item = [item];
+                    quantity = [quantity];  // Ensure quantity is also a single-value array
+                }
 
                 //insert each item into collection request items
                 for (var i = 0; i < item.length; i++) {
