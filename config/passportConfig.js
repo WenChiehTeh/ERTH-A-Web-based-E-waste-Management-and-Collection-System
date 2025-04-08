@@ -42,6 +42,38 @@ passport.use("local",
   )
 );
 
+passport.use("localAdmin",
+  new LocalStrategy(
+    { usernameField: "username", passwordField: "password" },
+    async (username, password, done) => {
+      try {
+        //query for user
+        const getUser = await pool.query("SELECT * FROM admins WHERE username = $1", [username]);
+        //find unregistered email
+        if (getUser.rows.length === 0) {
+          return done(null, false, { message: "This admin isn't registered!" });
+        }
+        //load user credentials into memory
+        const user = getUser.rows[0];
+        //match password
+        const isMatch = await bcrypt.compare(password, user.password);
+        
+        if (user.password == "Admin123") {
+          return done(null, user, { message: user.role });
+        }
+
+        //find incorrect password
+        if (!isMatch) {
+          return done(null, false, { message: "Incorrect password!" });
+        }
+        return done(null, user, { message: user.role });
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
 passport.use(
   "google", 
   new GoogleStrategy( 
@@ -69,14 +101,29 @@ passport.use(
 
 // Serialize user
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  const userType = user.role ? "admin" : "user"; // If role exists, treat as admin type
+  done(null, { id: user.id, type: userType });
 });
 
 // Deserialize user
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (userData, done) => {
+  const { id, type } = userData;
+
   try {
-    const getUser = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
-    done(null, getUser.rows[0]);
+    let result;
+
+    if (type === "user") {
+      result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    } else {
+      // admin, driver, warehouse_manager all come from 'admins' table
+      result = await pool.query("SELECT * FROM admins WHERE id = $1", [id]);
+    }
+
+    if (result.rows.length === 0) {
+      return done(null, false);
+    }
+
+    done(null, result.rows[0]);
   } catch (error) {
     done(error);
   }

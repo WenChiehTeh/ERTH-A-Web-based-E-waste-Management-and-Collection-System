@@ -7,7 +7,7 @@ CREATE TABLE users (
 );
 
 --Collection Request Table
-CREATE TABLE IF NOT EXISTS public.collectionrequests
+CREATE TABLE collectionRequests
 (
     id SERIAL PRIMARY KEY,
     sessionid TEXT,
@@ -32,3 +32,21 @@ CREATE TABLE collectionRequestsItems (
 	requestID INT,
 	FOREIGN KEY (requestID) REFERENCES collectionRequests(id) ON DELETE CASCADE
 );
+
+--Admin table
+CREATE TABLE admins (
+	id SERIAL PRIMARY KEY,
+    name TEXT,
+	username TEXT UNIQUE,
+	password TEXT,
+	role TEXT
+)
+
+--Driver table
+CREATE TABLE driver (
+	id serial PRIMARY KEY,
+	vehicleType TEXT,
+	numberPlate TEXT,
+	driverID INT,
+	FOREIGN KEY (driverID) REFERENCES admins(id) ON DELETE CASCADE
+)

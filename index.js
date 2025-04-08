@@ -6,6 +6,8 @@ import indexRoutes from "./routes/indexRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import viewRequests from "./routes/viewRequests.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import accountManagementRoutes from "./routes/accountManagementRoutes.js";
 import { deleteOldPendingPayments } from "./controllers/paymentHandling.js"
 
 //Server configuration
@@ -32,10 +34,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//delete outstanding payments that have been created more than 24 hours ago
+//Delete outstanding payments that have been created more than 24 hours ago
 deleteOldPendingPayments()
 
-// Check for pending payments that are created 24 hours ago every hour
+//Check for pending payments that are created 24 hours ago every hour
 setInterval(deleteOldPendingPayments, 60 * 60 * 1000);
 
 //Server initialization
@@ -48,3 +50,5 @@ app.use(indexRoutes);
 app.use(authRoutes);
 app.use(requestRoutes);
 app.use(viewRequests);
+app.use(adminRoutes);
+app.use(accountManagementRoutes);

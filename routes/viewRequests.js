@@ -36,7 +36,6 @@ router.get('/api/requests', async (req, res) => {
              LIMIT $2 OFFSET $3`,
             [status, limitNum, offset, req.user.id]
         );
-        console.log(result);
 
         // Query to get the total number of requests for pagination calculation
         const totalCountResult = await pool.query(

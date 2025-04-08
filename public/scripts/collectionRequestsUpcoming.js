@@ -5,7 +5,7 @@ async function fetchUpcomingRequests(page) {
     try {
         const response = await fetch(`/api/requests?status=pending&page=${page}&limit=${limit}`);
         const data = await response.json();
-        console.log(data);
+        console.log(data)
         renderRequests(data.requests);
         updatePagination(data.totalPages);
     } catch (error) {
@@ -15,19 +15,17 @@ async function fetchUpcomingRequests(page) {
 
 function renderRequests(requests) {
     const container = document.getElementById("list");
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear previous content
 
     requests.forEach(req => {
         // Convert the date to a Date object
         const dateObj = new Date(req.date);
-        
-        // Format the date as YYYY-MM-DD
         const formattedDate = dateObj.toISOString().split('T')[0];
 
         const requestCard = document.createElement("div");
         requestCard.classList.add("listItem");
         requestCard.innerHTML = `
-            <div class="collectionDesc" id="id">ID: ${req.id}</div>
+            <div class="collectionDesc">ID: ${req.id}</div>
             <div class="collectionDesc span2">Name: ${req.lastname} ${req.firstname}</div>
             <div class="collectionDesc span2">Date: ${formattedDate}</div>
             <div class="collectionDesc span2">Phone: ${req.phoneno}</div>
@@ -36,42 +34,34 @@ function renderRequests(requests) {
         `;
         container.appendChild(requestCard);
     });
-
-    // Create pagination buttons after rendering requests
-    const slider = document.createElement("div");
-    slider.classList.add("row");
-    slider.classList.add("my-4");
-    slider.classList.add("slider");
-    slider.innerHTML = `
-        <button class="sliderBtns" id="next">Next</button>
-        <button class="sliderBtns" id="back">Back</button>
-    `;
-    container.appendChild(slider);
-
-    // Add event listeners to the buttons
-    document.getElementById("next").addEventListener("click", () => {
-        currentPage++;
-        fetchUpcomingRequests(currentPage);
-    });
-
-    document.getElementById("back").addEventListener("click", () => {
-        currentPage--;
-        fetchUpcomingRequests(currentPage);
-    });
 }
 
+document.getElementById("next").addEventListener("click", () => {
+    currentPage++;
+    fetchUpcomingRequests(currentPage);
+});
+
+document.getElementById("back").addEventListener("click", () => {
+    currentPage--;
+    fetchUpcomingRequests(currentPage);
+});
+
 function updatePagination(totalPages) {
-    var nextButton = document.getElementById("next");
-    var backButton = document.getElementById("back");
-    if (currentPage == 1) {
-        backButton.classList.add("hide");
-        nextButton.classList.remove("hide");
-    } else if (currentPage == totalPages) {
-        nextButton.classList.add("hide");
-        backButton.classList.remove("hide");
-    } else {
-        nextButton.classList.remove("hide");
-        backButton.classList.remove("hide");
+    const nextButton = document.getElementById("next");
+    const backButton = document.getElementById("back");
+
+    if (totalPages <= 1) { 
+        nextButton.classList.add("hide")
+        backButton.classList.add("hide")
+    } else if (currentPage === 1) { 
+        nextButton.classList.remove("hide")
+        backButton.classList.add("hide")
+    } else if (currentPage === totalPages) { 
+        nextButton.classList.add("hide")
+        backButton.classList.remove("hide")
+    } else { 
+        nextButton.classList.remove("hide")
+        backButton.classList.remove("hide")
     }
 }
 

@@ -1,0 +1,73 @@
+<%- include("partials/sidebar.ejs"); %>
+<link href="/styles/addAccounts.css" rel="stylesheet">
+    <div class="formFlex">
+        <form action="/addAccount" method="POST">
+            <div class="formContainer">
+                <div class="title">Add Accounts</div>
+                <div class="detailsDiv">
+                    <div class="name">
+                        <label>Full Name:</label>
+                        <input class="textInput" id="fullName" type="text" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="username">
+                        <label>Username:</label>
+                        <p class="message"><%= locals.message %></p><br>
+                        <input class="textInput" id="username" type="text" placeholder="Username" name="username" required>
+                    </div>
+                    <div class="password">
+                        <label>Password:</label>
+                        <input class="textInput" id="password" type="text" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}" required>
+                    </div>
+                    <div class="role">
+                        <label>Role:</label>
+                        <select name="role" id="role" onchange="toggleDriverFields()" required>
+                            <option value="" disabled selected>--SELECT ROLE--</option>
+                            <option value="admin">Admin</option>
+                            <option value="driver">Driver</option>
+                            <option value="warehouseManager">Warehouse Manager</option>
+                        </select>
+                    </div>
+                    <div id="driverFields" class="hidden">
+                        <div class="vehicle">
+                            <label>Vehicle Type:</label>
+                            <select name="vehicle" id="vehicle" required>
+                                <option value="" disabled selected>--SELECT VEHICLE TYPE--</option>
+                                <option value="van">Van</option>
+                                <option value="truck">Truck</option>
+                                <option value="lorry">Lorry</option>
+                            </select>  
+                        </div>
+                        <div class="plate">
+                            <label for="numberPlate">Number Plate:</label>
+                            <input class="textInput" type="text" id="numberPlate" name="numberPlate" placeholder="e.g. ABC1234" required>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="submit">Submit</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </form> 
+    </div>
+    </body>
+</html>
+
+
+<script>
+    $(".add").addClass("current");
+
+    function toggleDriverFields() {
+        const role = $('#role').val();
+
+        if (role === 'driver') {
+            $('#driverFields').removeClass('hidden');
+            $('#vehicle').prop('required', true);
+            $('#numberPlate').prop('required', true);
+        } else {
+            $('#driverFields').addClass('hidden');
+            $('#vehicle').prop('required', false);
+            $('#numberPlate').prop('required', false);
+        }
+    }
+</script>

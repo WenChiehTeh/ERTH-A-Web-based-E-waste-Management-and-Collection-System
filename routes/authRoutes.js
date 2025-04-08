@@ -108,4 +108,41 @@ router.post("/registerAccount", async (req, res) => {
     }
 });
 
+router.get("/adminLogin", (req, res) => {
+  res.render("adminLogin.ejs");
+})
+
+//login function
+router.post("/loginAdmin", (req, res, next) => {
+  passport.authenticate("localAdmin", (err, user, info) => {
+    if (err){
+      return next(err);
+    }
+
+    if (!user) {
+      const data = {};
+      if (info.message === "Incorrect password!") {
+        data.messagePassword = "Incorrect password!";
+      } else if (info.message === "This admin isn't registered!") {
+        data.messageEmail = "Admin is not registered!";
+      }
+
+      return res.render("adminLogin.ejs", data);
+    } 
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      if (info.message = "admin") {
+        return res.redirect("/adminDashboard");
+      } else {
+        return res.send("DRIVER");
+      }
+      
+    });
+  })(req, res, next);
+});
+
 export default router;
