@@ -1,5 +1,5 @@
 <%- include("partials/sidebar.ejs"); %>
-<link href="/styles/addAccounts.css" rel="stylesheet">
+<link href="/styles/adminAddAccounts.css" rel="stylesheet">
     <div class="formFlex">
         <form action="/addAccount" method="POST">
             <div class="formContainer">
@@ -22,9 +22,9 @@
                         <label>Role:</label>
                         <select name="role" id="role" onchange="toggleDriverFields()" required>
                             <option value="" disabled selected>--SELECT ROLE--</option>
-                            <option value="admin">Admin</option>
-                            <option value="driver">Driver</option>
-                            <option value="warehouseManager">Warehouse Manager</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Driver">Driver</option>
+                            <option value="Warehouse Manager">Warehouse Manager</option>
                         </select>
                     </div>
                     <div id="driverFields" class="hidden">
@@ -32,9 +32,9 @@
                             <label>Vehicle Type:</label>
                             <select name="vehicle" id="vehicle" required>
                                 <option value="" disabled selected>--SELECT VEHICLE TYPE--</option>
-                                <option value="van">Van</option>
-                                <option value="truck">Truck</option>
-                                <option value="lorry">Lorry</option>
+                                <option value="Van">Van</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Lorry">Lorry</option>
                             </select>  
                         </div>
                         <div class="plate">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div>
-                        <button type="submit" class="submit">Submit</button>
+                        <button type="submit" class="submit">Add Account</button>
                     </div>
                     
                 </div>
@@ -52,22 +52,4 @@
     </div>
     </body>
 </html>
-
-
-<script>
-    $(".add").addClass("current");
-
-    function toggleDriverFields() {
-        const role = $('#role').val();
-
-        if (role === 'driver') {
-            $('#driverFields').removeClass('hidden');
-            $('#vehicle').prop('required', true);
-            $('#numberPlate').prop('required', true);
-        } else {
-            $('#driverFields').addClass('hidden');
-            $('#vehicle').prop('required', false);
-            $('#numberPlate').prop('required', false);
-        }
-    }
-</script>
+<script src="/scripts/adminAddAccounts.js"></script>

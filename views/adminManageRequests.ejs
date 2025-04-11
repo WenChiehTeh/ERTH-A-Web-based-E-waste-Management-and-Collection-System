@@ -1,0 +1,75 @@
+<%- include("partials/sidebar.ejs"); %>
+<link href="/styles/manageRequests.css" rel="stylesheet">
+
+<!-- Container to dynamically add requests -->
+<div class="formFlex">
+  <div class="formContainer" id="list"></div>
+</div>
+
+<!-- View Items Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2 class="modal-header">Items</h2>
+    <table id="item-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody id="item-list"></tbody>
+    </table>
+    <button id="close-modal" class="close-btn">Close</button>
+  </div>
+</div>
+
+<!-- Reschedule Modal -->
+<div id="deleteModal" class="modal hidden">
+  <div class="modal-content">
+    <h2 class="modal-header">Confirm Reschedule</h2>
+    <p>This request will be marked for rescheduling. Proceed?</p>
+    <div class="modal-buttons">
+      <button id="cancelBtn" class="close-btn">Cancel</button>
+      <button id="confirmDeleteBtn" class="close-btn" style="background-color: red;">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Approve Modal -->
+<div id="approveModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 class="modal-header">Approve Request</h2>
+      <div>
+        <div>
+          <label for="timeSelect" style="color:black">Select Time:</label>
+          <select id="timeSelect" class="modal-select">
+            <option value="">-- SELECT TIME --</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="12:00">12:00 PM</option>
+            <option value="13:00">1:00 PM</option>
+            <option value="14:00">2:00 PM</option>
+            <option value="15:00">3:00 PM</option>
+            <option value="16:00">4:00 PM</option>
+            <option value="17:00">5:00 PM</option>
+          </select>
+        </div>
+        <div class="driverDiv">
+          <label for="driverSelect" style="color:black; margin-top:10px;">Select Driver:</label>
+          <select id="driverSelect" class="modal-select">
+            <option value="">-- SELECT DRIVER --</option>
+            <% drivers.forEach(driver => { %>
+              <option value="<%= driver.id %>"><%= driver.name %></option>
+            <% }); %>
+          </select>
+        </div>
+      </div>
+  
+      <div class="modal-buttons">
+        <button id="cancelApproveBtn" class="close-btn">Cancel</button>
+        <button id="confirmApproveBtn" class="close-btn">Approve</button>
+      </div>
+    </div>
+  </div>
+<script src="/scripts/adminManageRequests.js"></script>

@@ -21,7 +21,9 @@ CREATE TABLE collectionRequests
     status TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     userID INT,
-    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE
+	driverID INT DEFAULT NULL,
+    FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
+	FOREIGN KEY (driverID) REFERENCES admins(id);
 )
 
 --Collection Items Table

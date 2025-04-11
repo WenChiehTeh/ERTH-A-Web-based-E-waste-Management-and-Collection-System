@@ -1,0 +1,175 @@
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.formFlex {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 75vw;
+    height: 80vh;
+    margin-top: 75px;
+    border-radius: 25px;
+    box-shadow: 5px 10px #888888;
+    background-color: #FEFAE0;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#accountsTable {
+    width: 90%;
+    border-collapse: collapse;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+#accountsTable thead {
+    background-color: #ccd5ae;
+    color: #333;
+}
+
+#accountsTable th,
+#accountsTable td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#accountsTable tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#accountsTable td button {
+    background-color: #d62828;
+    font-family: "Inter", sans-serif;
+    width: 100%;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#accountsTable td button:hover {
+    background-color: #a4161a;
+}
+
+#accountsTable tbody tr:nth-child(odd) {
+    background-color: #626F47;
+}
+
+#accountsTable tbody tr:nth-child(even) {
+    background-color: #A4B465;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #FEFAE0;
+    color: black;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-around;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#cancelBtn {
+    background-color: #626F47;
+    font-family: "Inter", sans-serif;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+#cancelBtn:hover {
+    background-color: #A4B465;
+}
+
+#confirmDeleteBtn {
+    background-color: red;
+    font-family: "Inter", sans-serif;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteBtn:hover {
+    background-color: #d62828;
+}
+
+.modal-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+@media (max-width: 768px) {
+    #accountsTable {
+        font-size: 14px;
+    }
+
+    #accountsTable th,
+    #accountsTable td {
+        padding: 10px;
+    }
+
+    .formContainer {
+        width: 90vw;
+    }
+}

@@ -9,7 +9,7 @@ const saltRounds = 10;
 
 router.post("/addAccount", async (req, res) => {
     //load data into memory
-    const username = req.body["username"].toLowerCase();
+    const username = req.body["username"].toUpperCase();
     const password = req.body["password"];
     const name = req.body["name"].toUpperCase();
     const role = req.body["role"];
@@ -26,7 +26,7 @@ router.post("/addAccount", async (req, res) => {
             };
             res.render("adminAddAccount.ejs", data);
         } else {
-            if (role == "driver") {
+            if (role == "Driver") {
                 const vehicleType = req.body["vehicle"];
                 const numberPlate = req.body["numberPlate"];
                 bcrypt.hash(password, saltRounds, async (err, hash) => {
@@ -56,10 +56,28 @@ router.post("/addAccount", async (req, res) => {
     } catch (e) {
         console.log("An error Occured: " + e);
     }
+});
 
+router.get('/api/loadAdminAccounts', async (req, res) => {
+  try {
+    const admins = await pool.query("SELECT id, name, username, role FROM admins");
 
+    res.json(admins.rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch accounts' });
+  }
+});
 
+router.delete('/accounts/:id', async (req, res) => {
+  const { id } = req.params;
 
-})
+  try {
+    await pool.query("DELETE FROM admins WHERE id = $1", [id]);
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete account' });
+  }
+});
 
 export default router;

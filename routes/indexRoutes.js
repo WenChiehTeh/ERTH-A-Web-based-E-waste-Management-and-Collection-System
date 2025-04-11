@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv"; 
-import pool from "../config/database.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 

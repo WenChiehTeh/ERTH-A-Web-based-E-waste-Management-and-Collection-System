@@ -1,0 +1,31 @@
+<%- include("partials/sidebar.ejs"); %>
+<link href="/styles/adminDeleteAccounts.css" rel="stylesheet">
+
+<div class="formFlex">
+  <div class="formContainer">
+    <table id="accountsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="deleteModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Are you sure?</h2>
+    <p>You are about to delete this account. This action cannot be undone.</p>
+    <div class="modal-buttons">
+      <button id="cancelBtn">Cancel</button>
+      <button id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+<script src="/scripts/adminDeleteAccounts.js"></script>
