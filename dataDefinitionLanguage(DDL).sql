@@ -22,6 +22,7 @@ CREATE TABLE collectionRequests
     created_at TIMESTAMP DEFAULT NOW(),
     userID INT,
 	driverID INT DEFAULT NULL,
+	rating INT DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
 	FOREIGN KEY (driverID) REFERENCES admins(id);
 )

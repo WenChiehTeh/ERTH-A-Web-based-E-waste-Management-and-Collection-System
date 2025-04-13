@@ -135,10 +135,10 @@ router.post("/loginAdmin", (req, res, next) => {
         return next(err);
       }
 
-      if (info.message = "admin") {
+      if (info.message == "Admin") {
         return res.redirect("/adminDashboard");
-      } else {
-        return res.send("DRIVER");
+      } else if (info.message == "Driver") {
+        return res.redirect("/driverDashboard");
       }
       
     });

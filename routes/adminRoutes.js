@@ -63,7 +63,7 @@ router.get("/adminManageRequests", async (req, res) => {
     }
 });
 
-router.patch('/requests/:id/reschedule', async (req, res) => {
+router.patch('/requestsAdmins/:id/reschedule', async (req, res) => {
     const { id } = req.params;
   
     try {

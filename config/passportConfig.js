@@ -57,10 +57,6 @@ passport.use("localAdmin",
         const user = getUser.rows[0];
         //match password
         const isMatch = await bcrypt.compare(password, user.password);
-        
-        if (user.password == "Admin123") {
-          return done(null, user, { message: user.role });
-        }
 
         //find incorrect password
         if (!isMatch) {

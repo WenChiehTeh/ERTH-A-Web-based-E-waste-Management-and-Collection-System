@@ -24,6 +24,13 @@ router.get("/viewRescheduleRequests", (req, res) => {
     res.render("viewRescheduleRequests.ejs", data);
 });
 
+router.get("/viewPastRequests", (req, res) => {
+    const data = {
+        points: req.user.points,
+    };
+    res.render("viewPastRequests.ejs", data);
+});
+
 // API route to fetch requests
 router.get('/api/requests', async (req, res) => {
     const { status = 'pending', page = 1, limit = 5 } = req.query;
@@ -35,14 +42,26 @@ router.get('/api/requests', async (req, res) => {
         const offset = (pageNum - 1) * limitNum;
 
         // Query to fetch the paginated requests
-        const result = await pool.query(
-            `SELECT collectionRequests.id, date, firstName, LastName, phoneNo, address, state
-             FROM collectionRequests
-             WHERE status = $1 AND userId = $4
-             ORDER BY created_at DESC
-             LIMIT $2 OFFSET $3`,
-            [status, limitNum, offset, req.user.id]
-        );
+        if (status == "completed") {
+            var result = await pool.query(
+                `SELECT collectionRequests.id, date, firstName, LastName, phoneNo, address, state, rating
+                 FROM collectionRequests
+                 WHERE status = $1 AND userId = $4
+                 ORDER BY created_at DESC
+                 LIMIT $2 OFFSET $3`,
+                [status, limitNum, offset, req.user.id]
+            );
+            console.log("fetch completed requests")
+        } else {
+            var result = await pool.query(
+                `SELECT collectionRequests.id, date, firstName, LastName, phoneNo, address, state
+                 FROM collectionRequests
+                 WHERE status = $1 AND userId = $4
+                 ORDER BY created_at DESC
+                 LIMIT $2 OFFSET $3`,
+                [status, limitNum, offset, req.user.id]
+            );
+        }
 
         console.log(result.rows);
 
@@ -172,6 +191,16 @@ router.get('/api/items/:requestId', async (req, res) => {
         console.error('Error fetching items:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+router.patch('/submitRating', async (req, res) => {
+    const { requestID, rating } = req.body;
+
+    console.log(requestID)
+
+    const result = await pool.query("UPDATE collectionRequests SET rating = $1 WHERE id = $2", [rating, requestID])
+
+    res.json({ message: 'Rating received successfully', rating });
 });
 
 export default router;
