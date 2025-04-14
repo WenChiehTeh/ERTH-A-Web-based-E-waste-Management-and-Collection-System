@@ -148,7 +148,14 @@ function renderRequests(requests) {
 
     requests.forEach(req => {
         const dateObj = new Date(req.date);
-        const formattedDate = dateObj.toISOString().split('T')[0];
+        let isoString = dateObj.toISOString();
+
+        // Get the UTC offset in minutes for Kuala Lumpur (GMT+8)
+        const klOffsetMinutes = -8 * 60; // Negative because UTC is "ahead"
+
+        // Create a new Date object by adding the offset
+        const adjustedDate = new Date(dateObj.getTime() - klOffsetMinutes * 60 * 1000);
+        const formattedDate = adjustedDate.toISOString().split('T')[0];
 
         const requestCard = document.createElement("div");
         requestCard.classList.add("listItem");
@@ -160,7 +167,7 @@ function renderRequests(requests) {
             <div class="collectionDesc span2">Date: ${formattedDate}</div>
             <div class="collectionDesc address">Address: ${req.address}</div>
             <button onclick="viewItems(${req.id})" class="viewItemBtn">View Items</button>
-            <button onclick="openRescheduleModal(${req.id})" class="viewItemBtn rescheduleBtn">Reschedule</button>
+            <button onclick="openRescheduleModal(${req.id})" class="viewItemBtn rescheduleBtn">Rating</button>
         `;
         } else {
             requestCard.innerHTML = `
@@ -172,7 +179,7 @@ function renderRequests(requests) {
             <button onclick="viewItems(${req.id})" class="viewItemBtn">View Items</button>
         `;
         }
-        
+
         container.appendChild(requestCard);
     });
 }
@@ -220,6 +227,29 @@ $(document).ready(function () {
             $(this).toggleClass('selected', value <= rating);
         });
     }
+});
+
+function showMessageModal(message) {
+    console.log("kjsdf")
+    const $modal = $('#messageModalSuccess');
+    $('#messageBody').text(message);
+  
+    $modal.removeClass('hidden');
+  }
+  
+function showMessageModalFail(message) {
+    const $modal = $('#messageModalFail');
+    $('#messageBodyFail').text(message);
+  
+    $modal.removeClass('hidden');
+}
+  
+$('#closeMessageBtn').on('click', function () {
+    $('#messageModalSuccess').addClass('hidden');
+});
+  
+$('#closeMessageBtnFail').on('click', function () {
+    $('#messageModalFail').addClass('hidden');
 });
 
 // Initial load

@@ -138,7 +138,9 @@ router.post("/loginAdmin", (req, res, next) => {
       if (info.message == "Admin") {
         return res.redirect("/adminDashboard");
       } else if (info.message == "Driver") {
-        return res.redirect("/driverDashboard");
+        return res.redirect("/driverCollectionRequests");
+      } else if (info.message == "Warehouse Manager") {
+        return res.redirect("/warehouseManager")
       }
       
     });

@@ -133,6 +133,7 @@ $("#confirm-reschedule").on("click", function () {
     .then(res => res.json())
     .then(data => {
         $("#reschedule-modal").css("display", "none");
+        showMessageModal("Rescheduling successful!")
         fetchUpcomingRequests(currentPage); // refresh list
     })
     .catch(error => {
@@ -148,7 +149,14 @@ function renderRequests(requests) {
 
     requests.forEach(req => {
         const dateObj = new Date(req.date);
-        const formattedDate = dateObj.toISOString().split('T')[0];
+        let isoString = dateObj.toISOString();
+
+        // Get the UTC offset in minutes for Kuala Lumpur (GMT+8)
+        const klOffsetMinutes = -8 * 60; // Negative because UTC is "ahead"
+
+        // Create a new Date object by adding the offset
+        const adjustedDate = new Date(dateObj.getTime() - klOffsetMinutes * 60 * 1000);
+        const formattedDate = adjustedDate.toISOString().split('T')[0];
 
         const requestCard = document.createElement("div");
         requestCard.classList.add("listItem");
@@ -164,6 +172,29 @@ function renderRequests(requests) {
         container.appendChild(requestCard);
     });
 }
+
+function showMessageModal(message) {
+    console.log("kjsdf")
+    const $modal = $('#messageModalSuccess');
+    $('#messageBody').text(message);
+  
+    $modal.removeClass('hidden');
+  }
+  
+function showMessageModalFail(message) {
+    const $modal = $('#messageModalFail');
+    $('#messageBodyFail').text(message);
+  
+    $modal.removeClass('hidden');
+}
+  
+$('#closeMessageBtn').on('click', function () {
+    $('#messageModalSuccess').addClass('hidden');
+});
+  
+$('#closeMessageBtnFail').on('click', function () {
+    $('#messageModalFail').addClass('hidden');
+});
 
 // Initial load
 fetchUpcomingRequests(currentPage);

@@ -22,6 +22,7 @@ document.getElementById('confirmDeleteBtn').addEventListener('click', async () =
   const result = await res.json();
 
   $('#deleteModal').addClass('hidden');
+  showMessageModal("Account successfully deleted!")
   loadAccounts();
 });
 
@@ -43,5 +44,27 @@ async function loadAccounts() {
     tbody.appendChild(row);
   });
 }
+
+function showMessageModal(message) {
+  const $modal = $('#messageModalSuccess');
+  $('#messageBody').text(message);
+
+  $modal.removeClass('hidden');
+}
+
+function showMessageModalFail(message) {
+  const $modal = $('#messageModalFail');
+  $('#messageBodyFail').text(message);
+
+  $modal.removeClass('hidden');
+}
+
+$('#closeMessageBtn').on('click', function () {
+  $('#messageModalSuccess').addClass('hidden');
+});
+
+$('#closeMessageBtnFail').on('click', function () {
+  $('#messageModalFail').addClass('hidden');
+});
 
 loadAccounts();

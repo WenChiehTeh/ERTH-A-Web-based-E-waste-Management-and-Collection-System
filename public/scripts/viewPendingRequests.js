@@ -88,8 +88,14 @@ function renderRequests(requests) {
 
     requests.forEach(req => {
         const dateObj = new Date(req.date);
+        let isoString = dateObj.toISOString();
 
-        const formattedDate = dateObj.toISOString().split('T')[0];
+        // Get the UTC offset in minutes for Kuala Lumpur (GMT+8)
+        const klOffsetMinutes = -8 * 60; // Negative because UTC is "ahead"
+
+        // Create a new Date object by adding the offset
+        const adjustedDate = new Date(dateObj.getTime() - klOffsetMinutes * 60 * 1000);
+        const formattedDate = adjustedDate.toISOString().split('T')[0];
 
         const requestCard = document.createElement("div");
         requestCard.classList.add("listItem");

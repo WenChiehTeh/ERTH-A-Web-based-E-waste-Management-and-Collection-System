@@ -8,6 +8,7 @@ import requestRoutes from "./routes/requestRoutes.js";
 import viewRequests from "./routes/viewRequests.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import driverRoutes from "./routes/driverRoutes.js";
+import warehouseManager from "./routes/warehouseManagerRoutes.js";
 import accountManagementRoutes from "./routes/accountManagementRoutes.js";
 import { deleteOldPendingPayments } from "./controllers/paymentHandling.js"
 import { updateCollectionRequestsStatus } from "./controllers/requestHandling.js"
@@ -60,4 +61,5 @@ app.use(requestRoutes);
 app.use(viewRequests);
 app.use(adminRoutes);
 app.use(driverRoutes);
+app.use(warehouseManager);
 app.use(accountManagementRoutes);

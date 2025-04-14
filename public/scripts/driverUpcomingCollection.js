@@ -1,41 +1,11 @@
-let currentPage = 1;
-const limit = 5;
+$(".collectionRequests").addClass("current");
 
-$("#next").on("click", function () {
-    currentPage++;
-    fetchUpcomingRequests(currentPage);
-});
-
-$("#back").on("click", function () {
-    currentPage--;
-    fetchUpcomingRequests(currentPage);
-});
-
-function updatePagination(totalPages) {
-    const $nextButton = $("#next");
-    const $backButton = $("#back");
-
-    if (totalPages <= 1) {
-        $nextButton.addClass("hide");
-        $backButton.addClass("hide");
-    } else if (currentPage === 1) {
-        $nextButton.removeClass("hide");
-        $backButton.addClass("hide");
-    } else if (currentPage === totalPages) {
-        $nextButton.addClass("hide");
-        $backButton.removeClass("hide");
-    } else {
-        $nextButton.removeClass("hide");
-        $backButton.removeClass("hide");
-    }
-};
-
-async function fetchUpcomingRequests(page) {
+async function fetchUpcomingRequests() {
     try {
-        const response = await fetch(`/api/requestsApproved?status=approved&page=${page}&limit=${limit}`);
+        const response = await fetch(`/api/requestsDriver`);
         const data = await response.json();
+        console.log(data)
         renderRequests(data.requests);
-        updatePagination(data.totalPages);
     } catch (error) {
         console.error("Error fetching upcoming requests:", error);
     }
@@ -105,14 +75,13 @@ function renderRequests(requests) {
             <div class="collectionDesc span2">Phone: ${req.phoneno}</div>
             <div class="collectionDesc span2">Date: ${formattedDate}</div>
             <div class="collectionDesc span2">Time: ${req.time}</div>
-            <div class="collectionDesc span2">Driver Name: ${req.name}</div>
-            <div class="collectionDesc span2">Vehicle: ${req.vehicletype} (${req.numberplate})</div>
             <div class="collectionDesc span2 address">Address: ${req.address}</div>
             <button onclick="viewItems(${req.id})" class="viewItemBtn">View Items</button>
         `;
         container.appendChild(requestCard);
+        console.log("sadjhfds")
     });
 };
 
 // Initial load
-fetchUpcomingRequests(currentPage);
+fetchUpcomingRequests();

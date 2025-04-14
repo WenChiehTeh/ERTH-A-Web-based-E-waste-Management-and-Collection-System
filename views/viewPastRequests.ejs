@@ -61,10 +61,21 @@
         </div>
       </div>
     </div>
+        <!-- Success Modal -->
+        <div id="messageModalSuccess" class="modals hidden">
+          <div class="modal-content">
+            <div class="circle">
+              <svg class="tick" width="200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12L10 18L20 6" stroke="white" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+              </svg>
+            </div>
+            <p id="messageBody"></p>
+            <div class="btnDiv">
+              <button id="closeMessageBtn" class="btn">Close</button>
+            </div>
+          </div>
+        </div>
     <script src="scripts/viewPastRequests.js"></script>
 </body>
-
-<script>
-</script>
 
 <%- include("partials/footer.ejs"); %>

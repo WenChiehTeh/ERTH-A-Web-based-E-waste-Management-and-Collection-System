@@ -1,0 +1,283 @@
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.formFlex {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 50vw;
+    min-height: 80vh;
+    margin: 75px 0px 40px 0px;
+    border-radius: 25px;
+    box-shadow: 5px 10px #888888;
+    background-color: #FEFAE0;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.listItem {
+    width: 100%;
+    min-height: 17vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.span2 {
+    grid-column: span 2;
+}
+
+.listItem > * {
+    color: black;
+    font-family: "Inter", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.viewItemBtn, .rescheduleBtn, .approveBtn {
+    height: 5vh;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border: 1px solid black;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+    color: white
+}
+
+.viewItemBtn {
+    background-color: #626F47;
+}
+
+.viewItemBtn:hover {
+    background-color: #A4B465;
+}
+
+.rescheduleBtn {
+    background-color: red;
+}
+
+.rescheduleBtn:hover {
+    background-color: #a4161a;
+}
+
+.approveBtn {
+    background-color: #626F47;
+}
+
+.approveBtn:hover {
+    background-color: #A4B465;
+}
+
+/* Table styling */
+#item-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#item-table th, #item-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#item-table th {
+    background-color: #f2f2f2;
+}
+
+th, tr, .modal-header{
+    color: black;
+}
+
+/* Modal and button styling */
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    overflow-y: auto; 
+    background-color: #FEFAE0;
+    border-radius: 15px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.close-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #626F47;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+}
+
+.close-btn:hover {
+    background-color: #A4B465;
+}
+
+.modal-header {
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+}
+
+th, td, tr {
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+}
+
+.hide {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+p, h2{
+    color: black;
+    text-align: center;
+}
+
+#driverSelect, #timeSelect {
+    width: 100%;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 15px;
+}
+
+.close-btn {
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.driverDiv {
+    margin-top: 10px;
+}
+
+#cancelApproveBtn {
+    background-color: red;
+}
+
+#cancelApproveBtn:hover {
+    background-color: #a4161a;
+}
+
+#confirmDeleteButton:hover {
+    background-color: #a4161a;
+}
+
+.circle, .circleF {
+    width: 15vw;
+    margin: auto;
+    min-width: 5vw;
+    height: 15vw;
+    background-color: #A4B465;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circleF {
+    background-color: red;
+}
+
+.tick {
+    width: 15vw;
+    height: 15vh;
+    filter: brightness(0) invert(1);
+}
+
+#messageBody, #messageBodyFail {
+    font-family: "Inter", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.btnDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    width: 50%;
+    height: 50px;
+    margin-top: 15px;
+    background-color: #626F47;
+    border: 1px solid black;
+    border-radius: 15px;
+    color: white;
+    transition: background-color 0.3s ease;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: #A4B465;
+}
+
+  @media only screen and (max-width: 1000px) {
+
+    .bar {
+        height: 50vh;
+    }
+
+    .barFlex {
+        gap: 40px;
+    }
+
+    .list {
+        min-height: 250vh;
+    }
+
+    .listItem {
+        min-height: 40vh;
+    }
+
+    .sliderBtns {
+        width:20%
+    }
+  }

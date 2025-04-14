@@ -25,7 +25,7 @@ CREATE TABLE collectionRequests
 	rating INT DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
 	FOREIGN KEY (driverID) REFERENCES admins(id);
-)
+);
 
 --Collection Items Table
 CREATE TABLE collectionRequestsItems (
@@ -52,4 +52,30 @@ CREATE TABLE driver (
 	numberPlate TEXT,
 	driverID INT,
 	FOREIGN KEY (driverID) REFERENCES admins(id) ON DELETE CASCADE
-)
+);
+
+--Warehouse table
+CREATE TABLE warehouse (
+	id SERIAL PRIMARY KEY,
+	item TEXT,
+	QUANTITY INT
+);
+
+--Process requests table
+CREATE TABLE processRequests (
+	id SERIAL PRIMARY KEY,
+	type TEXT,
+	date date,
+	time TEXT,
+	status TEXT,
+	driverId TEXT
+);
+
+--Process requests itemsTable
+CREATE TABLE processRequestsItems (
+	id SERIAL PRIMARY KEY,
+	item TEXT,
+	quantity INT,
+	requestID INT,
+	FOREIGN KEY (requestID) REFERENCES processRequests(id) ON DELETE CASCADE
+);
