@@ -68,7 +68,8 @@ CREATE TABLE processRequests (
 	date date,
 	time TEXT,
 	status TEXT,
-	driverId TEXT
+	driverId INT,
+	FOREIGN KEY (driverId) REFERENCES admins(id) ON DELETE CASCADE
 );
 
 --Process requests itemsTable
