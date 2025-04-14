@@ -11,7 +11,7 @@ import driverRoutes from "./routes/driverRoutes.js";
 import warehouseManager from "./routes/warehouseManagerRoutes.js";
 import accountManagementRoutes from "./routes/accountManagementRoutes.js";
 import { deleteOldPendingPayments } from "./controllers/paymentHandling.js"
-import { updateCollectionRequestsStatus } from "./controllers/requestHandling.js"
+import { updateCollectionRequestsStatus, updateProcessRequestsStatus } from "./controllers/requestHandling.js"
 
 //Server configuration
 const app = express();
@@ -38,16 +38,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Delete outstanding payments that have been created more than 24 hours ago
-deleteOldPendingPayments()
+deleteOldPendingPayments();
 
 //Check for pending payments that are created 24 hours ago every hour
 setInterval(deleteOldPendingPayments, 60 * 60 * 1000);
 
 //Check for completed requests
-updateCollectionRequestsStatus()
+updateCollectionRequestsStatus();
 
 //Check for completed requests every hour
 setInterval(updateCollectionRequestsStatus, 60 * 60 * 1000);
+
+//check for completed process requests
+updateProcessRequestsStatus();
+
+//check for completed process requests every hour
+setInterval(updateProcessRequestsStatus, 60 * 60 * 1000);
 
 //Server initialization
 app.listen(port, () => {

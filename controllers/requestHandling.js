@@ -24,3 +24,20 @@ export async function updateCollectionRequestsStatus() {
         console.error("Error updating collection request statuses:", error);
     }
 }
+
+export async function updateProcessRequestsStatus() {
+    try {
+        const { rows: updatedRequests } = await pool.query("UPDATE processRequests SET status = 'completed' WHERE  status = 'approved' AND date < CURRENT_DATE RETURNING id;");
+
+        const updatedIds = updatedRequests.map(req => req.id);
+
+        if (updatedIds.length === 0) {
+            console.log("No process requests to update.");
+            return;
+        }
+
+        console.log(`Updated ${updatedIds.length} process requests.`);
+    } catch (error) {
+        console.error("Error updating collection request statuses:", error);
+    }
+}
