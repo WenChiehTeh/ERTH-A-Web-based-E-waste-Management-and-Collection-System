@@ -36,7 +36,7 @@ a:hover {
 }
 
 #list {
-    height: 95vh;
+    min-height: 330px;
 }
 
 .barFlex {
@@ -51,7 +51,7 @@ a:hover {
 
 .barItem {
     width: 80%;
-    height: 5vh;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,6 +78,7 @@ a:hover {
 
 .listItem {
     height: 18vh;
+    min-height: 300px;
     background-color: white;
     border: 2px solid #626F47;
     border-radius: 10px;
@@ -308,7 +309,12 @@ th, td, tr {
   @media only screen and (max-width: 1000px) {
 
     .bar {
-        height: 50vh;
+        height: 40vh;
+        min-height: 0px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
     }
 
     .barFlex {
@@ -317,6 +323,7 @@ th, td, tr {
 
     .list {
         min-height: 250vh;
+        border-top-right-radius: 0px;
     }
 
     .listItem {

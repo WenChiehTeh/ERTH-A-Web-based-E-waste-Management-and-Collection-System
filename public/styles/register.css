@@ -7,6 +7,8 @@ body {
 
 .loginContainer {
     height: 70vh;
+    min-height: 830px;
+    max-height: 1000px;
     width: 60vw;
     margin: auto;
     margin-top: 50px;

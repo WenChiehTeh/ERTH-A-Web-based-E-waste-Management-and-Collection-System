@@ -14,7 +14,8 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    width: 20vw;
+    width: 50vw;
+    max-width: 700px;
     height: 60vh;
     margin-top: 75px;
     border-radius: 25px;

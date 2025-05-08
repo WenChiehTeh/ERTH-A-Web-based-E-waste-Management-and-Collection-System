@@ -2,8 +2,17 @@
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	email TEXT UNIQUE NOT NULL,
-	password TEXT NOT NULL.
-	points integer DEFAULT 0,
+	password TEXT NOT NULL,
+	points integer DEFAULT 0
+);
+
+--Admin table
+CREATE TABLE admins (
+	id SERIAL PRIMARY KEY,
+    name TEXT,
+	username TEXT UNIQUE,
+	password TEXT,
+	role TEXT
 );
 
 --Collection Request Table
@@ -24,7 +33,7 @@ CREATE TABLE collectionRequests
 	driverID INT DEFAULT NULL,
 	rating INT DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES users(id) ON DELETE CASCADE,
-	FOREIGN KEY (driverID) REFERENCES admins(id);
+	FOREIGN KEY (driverID) REFERENCES admins(id) ON DELETE CASCADE
 );
 
 --Collection Items Table
@@ -35,15 +44,6 @@ CREATE TABLE collectionRequestsItems (
 	requestID INT,
 	FOREIGN KEY (requestID) REFERENCES collectionRequests(id) ON DELETE CASCADE
 );
-
---Admin table
-CREATE TABLE admins (
-	id SERIAL PRIMARY KEY,
-    name TEXT,
-	username TEXT UNIQUE,
-	password TEXT,
-	role TEXT
-)
 
 --Driver table
 CREATE TABLE driver (

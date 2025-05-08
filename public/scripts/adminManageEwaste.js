@@ -61,6 +61,7 @@ async function fetchUpcomingRequests() {
   try {
     const response = await fetch(`/api/ewaste/requestsAdmin?status=Pending`);
     const data = await response.json();
+    console.log(data);
     renderRequests(data.requests);
   } catch (err) {
     console.error("Error fetching upcoming requests:", err);
@@ -87,7 +88,7 @@ function renderRequests(requests) {
     card.innerHTML = `
       <div class="collectionDesc span2">ID: ${req.id}</div>
       <div class="collectionDesc">Type: ${req.type}</div>
-      <div class="collectionDesc">Date: ${date}</div>
+      <div class="collectionDesc">Date: ${req.date}</div>
       <button onclick="viewItems(${req.id})" class="viewItemBtn">View Items</button>
       <button onclick="showRescheduleModal(${req.id})" class="rescheduleBtn">Reject</button>
       <button onclick="showApproveModal(${req.id})" class="approveBtn">Approve</button>

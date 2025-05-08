@@ -186,8 +186,7 @@ function renderRequests(requests) {
 
 $(document).ready(function () {
     const $stars = $('.star');
-    const $ratingValue = $('#rating-value');
-    var selectedRating = 0;
+    let selectedRating = 0;
 
     $stars.on('mouseover', function () {
         const value = parseInt($(this).data('value'));
@@ -201,8 +200,14 @@ $(document).ready(function () {
     $stars.on('click', function () {
         selectedRating = parseInt($(this).data('value'));
         highlightStars(selectedRating);
-        console.log(selectedRating);
-        
+    });
+
+    $('#submit-rating').on('click', function () {
+        if (selectedRating === 0) {
+            alert("Please select a rating before submitting.");
+            return;
+        }
+
         fetch('/submitRating', {
             method: 'PATCH',
             headers: {
@@ -210,14 +215,19 @@ $(document).ready(function () {
             },
             body: JSON.stringify({ 
                 requestID: requestReview,
-                rating: selectedRating }),
+                rating: selectedRating 
+            }),
         })
-            .then(response => response.json())
-            .then(data => {
+        .then(response => response.json())
+        .then(data => {
             console.log('Server response:', data);
+            $("#reschedule-modal").css("display", "none");
+            showMessageModal("Rating submitted successfully!");
+            fetchUpcomingRequests(currentPage); // Refresh the list
         })
         .catch(error => {
             console.error('Error submitting rating:', error);
+            showMessageModalFail("Failed to submit rating.");
         });
     });
 
@@ -228,7 +238,6 @@ $(document).ready(function () {
         });
     }
 });
-
 function showMessageModal(message) {
     console.log("kjsdf")
     const $modal = $('#messageModalSuccess');
