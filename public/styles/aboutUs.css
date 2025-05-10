@@ -1,0 +1,118 @@
+.hero {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-image: url('../images/E-waste.png'), url('../images/E-waste2.png');
+    background-color: rgba(255,255,255,0.75);
+    background-blend-mode: lighten;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body {
+    background-image: linear-gradient(to right, #FEFAE0, #A4B465);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 600px;
+}
+
+#about {
+    color: rgb(33,37,31) !important;
+}
+
+.heroTitle {
+    color: #626F47 !important;
+    font-size: 6rem;
+    text-shadow: 2px 2px 4px  rgba(164, 180, 101, 0.75);
+}
+
+body {
+    line-height: 1.6;
+    background-image: linear-gradient(to right, #FEFAE0, #A4B465);
+}
+
+.container1 {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.section img {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 4px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.service-card {
+    background: #FEFAE0;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border-left: 4px solid #A4B465;
+}
+
+.service-card h4 {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #626F47 !important;
+}
+
+.service-card p {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.subsection {
+    margin-bottom: 2.5rem;
+}
+
+.subsection h3 {
+    color: #626F47 !important;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    font-size: 4rem;
+}
+
+.ourcomp {
+    background-color: #626F47;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.ourcomp p {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 30px;
+    color: #FEFAE0;
+    text-align: center;
+}
+
+@media (max-width: 520px) {
+    .subsection h3 {
+        font-size: 2rem;
+    }
+}

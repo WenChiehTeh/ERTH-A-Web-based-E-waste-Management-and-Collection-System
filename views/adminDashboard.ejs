@@ -1,9 +1,112 @@
 <%- include("partials/sidebar.ejs"); %>
+<link href="/styles/adminDashboard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-<body>
-    <h1>sakdjfhsdajkfhsadjfksdhfil</h1>
-</body>
+<div class="formFlex">
+    <div class="formContainer">
+        <div class="row1">
+            <div class="employeeDiv">
+                <p class="containerHeader tableheader">Top 3 Drivers</p>
+                <table id="accountsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% result.forEach((employee, index) => { %>
+                          <tr>
+                            <td><%= employee.id %></td>
+                            <td><%= employee.name %></td>
+                            <td><%= String(employee.averagerating).slice(0, 4) %></td>
+                          </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="collectionDiv">
+                <p class="containerHeader">Total Collection Requests Made This Year</p>
+                <p class="containerData"><%= locals.result2 %></p>
+            </div>
+            <div class="processDiv">
+                <p class="containerHeader">Total E-waste Processed This Year</p>
+                <p class="containerData"><%= locals.result3 %></p>
+            </div>
+        </div>
 
+        <div class="row2">
+            <div id="barDiv" class="chartContainer"></div>
+        </div>
+
+        <div class="row3">
+            <div id="scatterDiv" class="chartContainer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
     $(".home").addClass("current");
+
+    var monthlyData = <%= JSON.stringify(monthList) %>;
+    var processData = <%= JSON.stringify(processList) %>;
+    console.log(processData)
+
+    // Bar Chart
+    var barData = [{
+        x: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July' , 'Auguest', 'September', 'October', 'November', 'December'],
+        y: monthlyData,
+        type: 'bar',
+        marker: {
+        color: '#A4B465' 
+        }
+    }];
+
+    var barLayout = {
+        title: 'Number of Requests Made By Month',
+        xaxis: { title: 'Months' },
+        yaxis: { title: 'No. Of Requests Made' },
+        autosize: true,
+        useResizeHandler: true,
+        paper_bgcolor: '#FEFAE0',
+        plot_bgcolor: '#FEFAE0',
+        font: {
+            family: 'Inter',
+            weight: 500,
+            size: 16,
+            color: '#000000'
+        }
+    };
+
+    Plotly.newPlot('barDiv', barData, barLayout, { responsive: true });
+
+    // Scatter Plot
+    var scatterData = [{
+        x: ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July' , 'Auguest', 'September', 'October', 'November', 'December'],
+        y: processData,
+        type: 'scatter',
+        marker: {
+        color: '#A4B465' 
+        }
+    }];
+
+    var scatterLayout = {
+        title: 'Number of E-waste Processed By Month',
+        xaxis: { title: 'Months' },
+        yaxis: { title: 'Number Of E-waste Processed' },
+        autosize: true,
+        useResizeHandler: true,
+        paper_bgcolor: '#FEFAE0',
+        plot_bgcolor: '#FEFAE0',
+        font: {
+            family: 'Inter',
+            weight: 500,
+            size: 16,
+            color: '#000000'
+        }
+    };
+
+    Plotly.newPlot('scatterDiv', scatterData, scatterLayout, { responsive: true });
 </script>

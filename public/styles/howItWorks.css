@@ -1,0 +1,142 @@
+.hero {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-image: url('../images/E-waste.png'), url('../images/E-waste2.png');
+    background-color: rgba(255,255,255,0.75);
+    background-blend-mode: lighten;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body {
+    background-image: linear-gradient(to right, #FEFAE0, #A4B465);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 600px;
+}
+
+#how {
+    color: rgb(33,37,31) !important;
+}
+
+.heroTitle {
+    color: #626F47 !important;
+    font-size: 6rem;
+    text-shadow: 2px 2px 4px  rgba(164, 180, 101, 0.75);
+}
+
+.heroButton {
+    background-color: #626F47; 
+    border: none;
+    color: #FEFAE0;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 2px;
+    border-radius: 25px;
+    width: 50%;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.heroButton:hover {
+    background-color: #FFCF50;
+}
+
+body {
+    line-height: 1.6;
+    background-image: linear-gradient(to right, #FEFAE0, #A4B465);
+}
+
+.container1 {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 40px;
+}
+
+.stepBox {
+    background-color: #5d6f3c;
+    color: white;
+    padding: 90px 40px 30px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.stepLabel {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FEFAE0;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stepLine {
+    height: 50px;
+    width: 4px;
+    background-color: #3f4c2e;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.stepBox:last-child .stepLine {
+    display: none;
+}
+
+.optionalText {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #e1e1e1;
+}
+
+  .optionalText a {
+    color: white;
+    text-decoration: underline;
+}
+
+.text {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 675px) {
+    .stepLabel {
+        font-size: 1rem;
+    }
+
+    .stepBox {
+        padding-top: 120px;
+    }
+}

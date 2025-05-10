@@ -226,8 +226,33 @@ function setRoute(route) {
 
 // Initialize dropdowns on page load
 populateDropdowns();
+setMinSelectableDate();
 
 //hide all pages except items page
 $("#detailsForm").hide();
 $("#dateForm").hide();
 $("#paymentForm").hide();
+
+function setMinSelectableDate() {
+    const dateInput = $('#date');
+    const today = new Date();
+
+    // Minimum date: 7 days from today
+    const minDateObj = new Date(today);
+    minDateObj.setDate(minDateObj.getDate() + 7);
+
+    // Maximum date: 2 months from today
+    const maxDateObj = new Date(today);
+    maxDateObj.setMonth(maxDateObj.getMonth() + 2);
+
+    // Format date as YYYY-MM-DD
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    dateInput.attr('min', formatDate(minDateObj));
+    dateInput.attr('max', formatDate(maxDateObj));
+}

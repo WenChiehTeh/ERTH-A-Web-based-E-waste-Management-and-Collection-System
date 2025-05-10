@@ -260,6 +260,10 @@ th, td, tr {
         min-height: 40vh;
     }
 
+    .listItem div{
+        overflow: scroll;
+    }
+
     .sliderBtns {
         width:20%
     }

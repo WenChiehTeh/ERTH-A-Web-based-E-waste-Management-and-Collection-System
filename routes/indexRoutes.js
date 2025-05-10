@@ -21,6 +21,34 @@ router.get("/", (req, res) => {
     }
 })
 
+router.get("/blog", (req, res) => {
+  res.render("blogsMain.ejs");
+})
+
+router.get("/blog1", (req, res) => {
+  res.render("blogs/blog1.ejs");
+})
+
+router.get("/blog2", (req, res) => {
+  res.render("blogs/blog2.ejs");
+})
+
+router.get("/blog3", (req, res) => {
+  res.render("blogs/blog3.ejs");
+})
+
+router.get("/calculateEwaste", (req, res) => {
+  res.render("calculateEwaste.ejs");
+})
+
+router.get("/howItWorks", (req, res) => {
+  res.render("howItWorks.ejs");
+})
+
+router.get("/aboutUs", (req, res) => {
+    res.render("aboutUs.ejs");
+})
+
 router.get("/homepage", async (req, res) => {
     const data = {
       googleMapsAPI : googleMapsAPI

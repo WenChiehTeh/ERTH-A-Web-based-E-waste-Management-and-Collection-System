@@ -39,8 +39,9 @@ form {
 }
 
 .title2 {
-    font-weight: 400;
-    font-size: 1.75rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 0px;
 }
 
 label {

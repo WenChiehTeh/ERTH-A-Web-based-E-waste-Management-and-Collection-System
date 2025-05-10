@@ -1,0 +1,56 @@
+
+<%- include("partials/header(login).ejs"); %>
+<link href="/styles/howItWorks.css" rel="stylesheet">
+
+    <div class="px-4 py-5 text-center hero">
+        <div class="heroContent">
+            <h1 class="display-5 fw-bold text-body-emphasis heroTitle">How It Works</h1>
+        </div>
+    </div>
+
+    <main class="container1">
+        <section class="section" id="about">
+            <div class="stepsContainer">
+
+                <div class="stepBox">
+                  <div class="stepLabel">📝 Step 1: Make A Collection Request</div>
+                  <div class="text">Fill in the collection request form to allow an ERTH representative to manage your request.</div> 
+                  <div class="stepLine"></div>
+                </div>
+            
+                <div class="stepBox">
+                  <div class="stepLabel">💳 Step 2: Make Payment For Delivery Fee</div>
+                  <div class="text">Make payment by credit/debit card, GrabPay, FPX or points redemption.</div> 
+                  <div class="stepLine"></div>
+                </div>
+            
+                <div class="stepBox">
+                  <div class="stepLabel">🗓️ Step 3: Track Status Of Collection Request</div>
+                  <div class="text">
+                    Check to see if your collection request has been approved or requested for rescheduling.
+                    <div class="optionalText">
+                    NOTE: If your request was sent for rescheduling, please choose another date that is 7 days from the day of rescheduling. Contact our
+                    <a href="tel:+60142211446">Whatsapp</a> if you need assistance.
+                    </div>
+                  </div>
+                  <div class="stepLine"></div>
+                </div>
+
+                <div class="stepBox">
+                    <div class="stepLabel">🚚 Step 4: Pass Your E-waste To Our Heroes</div>
+                    <div class="text">Give your e-waste to our Hero.</div> 
+                    <div class="stepLine"></div>
+                  </div>
+
+                <div class="stepBox">
+                    <div class="stepLabel">💵 Step 5: Receive Money Via DuitNow</div>
+                    <div class="text">Receive money from our heroes via DuitNow.</div>
+                    <div class="stepLine"></div>
+                </div>
+
+                <a href="/register" class="heroButton">Sign me up!</a>
+            </div>
+        </section>
+    </main>
+
+<%- include("partials/footer.ejs"); %>

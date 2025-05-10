@@ -1,0 +1,64 @@
+* {
+    font-family:  "Inter", sans-serif;;
+}
+
+.hero {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-image: url('../images/E-waste.png'), url('../images/E-waste2.png');
+    background-color: rgba(255,255,255,0.75);
+    background-blend-mode: lighten;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#blogs {
+    color: rgb(33,37,31) !important;
+}
+
+.heroTitle {
+    color: #626F47 !important;
+    font-size: 6rem;
+    text-shadow: 2px 2px 4px  rgba(164, 180, 101, 0.75);
+}
+
+body {
+    background-image: linear-gradient(to right, #FEFAE0, #A4B465);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 600px;
+}
+
+.featured {
+    height: 100%;
+    min-width: none;
+    max-height: 800px;
+    background-image: url("../images/thumbnail1.png") !important;
+}
+
+.bootstrapContainer {
+    height: 100%;
+    min-height: 550px;
+    width: 100%;
+    max-width: 1500px;
+    margin: auto
+}
+
+.rounded {
+    background-color: #FEFAE0;
+}
+
+.card1 {
+    padding-right: 0px;
+}
+
+.mb-2 {
+    margin-right: 0px !important;
+}
+
+.featured * {
+    color: white !important;
+}

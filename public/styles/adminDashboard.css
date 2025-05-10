@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.formFlex {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar {
+    height: 180vh;
+}
+
+.formContainer {
+    height: 200%;
+    min-height: 1000px;
+    max-height: 2000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1.5fr 1.5fr;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: 80vw;
+    max-width: 1500px;
+    margin-top: 75px;
+}
+
+.row1 {
+    height: 100%;
+    min-height: 200px;
+    max-height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.row2 {
+    height: 100%;
+    min-height: 300px;
+    max-height: 600px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.row3 {
+    height: 100%;
+    min-height: 300px;
+    max-height: 600px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.employeeDiv {
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border-radius: 15px;
+    box-shadow: 3px 7px #888888;
+    background-color: #FEFAE0;
+}
+
+.collectionDiv, .processDiv {
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 3px 7px #888888;
+    background-color: #FEFAE0;
+}
+
+.containerHeader {
+    height: 100px;
+    text-align: center;
+    color: black;
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    margin: 20px 10px;
+}
+
+.tableheader {
+    height: 50px;
+}
+
+.containerData {
+    margin-top: 70px;
+    color: black;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+}
+
+#accountsTable {
+    width: 90%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: auto;
+    margin-top: 20px;
+}
+
+#accountsTable thead {
+    background-color: #ccd5ae;
+    color: #333;
+}
+
+#accountsTable th,
+#accountsTable td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#accountsTable tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#accountsTable tbody tr:nth-child(odd) {
+    background-color: #626F47;
+}
+
+#accountsTable tbody tr:nth-child(even) {
+    background-color: #A4B465;
+}
+
+.chartContainer {
+    width: 100%;
+    height: 100%;
+}

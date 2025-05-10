@@ -3,17 +3,96 @@ import pool from "../config/database.js";
 
 const router = express.Router();
 
-router.get("/adminDashboard", (req, res) => {
-    console.log(req.user);
-    if (req.isAuthenticated()) {
-        const data = {
-            name: req.user.name,
-            username: req.user.username,
-        };
-        res.render("adminDashboard.ejs", data);
-    } else {
-      res.redirect("/adminLogin");
-    }
+router.get("/adminDashboard", async (req, res) => {
+  try {
+      console.log(req.user);
+
+      // Initialize array for monthly data
+      const monthList = new Array(12).fill(0);
+      const processList = new Array(12).fill(0);
+
+      const result = await pool.query(`
+          SELECT admins.id, admins.name, AVG(rating) AS averageRating 
+          FROM collectionRequests 
+          JOIN admins ON collectionRequests.driverID = admins.id 
+          GROUP BY admins.id 
+          ORDER BY averageRating DESC 
+          LIMIT 3;
+      `);
+
+      const result2 = await pool.query(`
+          SELECT COUNT(*) AS totalRequests 
+          FROM collectionRequests 
+          WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE);
+      `);
+
+      const result3 = await pool.query(`
+        SELECT SUM(quantity) AS totalprocess 
+        FROM processRequests 
+        JOIN processRequestsItems ON processRequests.id = processRequestsItems.requestId 
+        WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE) AND status IN ('approved', 'completed')
+    `);
+    
+    const result4 = await pool.query(`
+        SELECT 
+            EXTRACT(MONTH FROM date) AS month_number, 
+            COUNT(*) AS total_requests 
+        FROM collectionRequests 
+        WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE) AND status IN ('approved', 'completed')
+        GROUP BY month_number 
+        ORDER BY month_number;
+    `);
+
+      const result5 = await pool.query(`
+        SELECT 
+            EXTRACT(MONTH FROM date) AS month_number, 
+            SUM(quantity) AS total_requests 
+        FROM processRequests 
+		    JOIN processRequestsItems
+		    ON processRequests.id = processRequestsItems.requestID
+        WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE) AND status IN ('approved', 'completed')
+        GROUP BY month_number 
+        ORDER BY month_number;
+    `);
+
+      // Format employee ratings
+      result.rows.forEach(element => {
+          if (element.averagerating == null) {
+              element.averagerating = "0.00";
+          } else {
+              element.averagerating = parseFloat(element.averagerating).toFixed(2);
+          }
+      });
+
+      // Fill in monthList with actual data
+      result4.rows.forEach(element => {
+          const monthIndex = parseInt(element.month_number) - 1;
+          monthList[monthIndex] = parseInt(element.total_requests);
+      });
+
+      result5.rows.forEach(element => {
+        const processIndex = parseInt(element.month_number) - 1;
+        processList[processIndex] = parseInt(element.total_requests);
+      });
+
+      if (req.isAuthenticated()) {
+          const data = {
+              name: req.user.name,
+              username: req.user.username,
+              result: result.rows,
+              result2: result2.rows[0].totalrequests,
+              result3: result3.rows[0].totalprocess,
+              monthList: monthList,
+              processList: processList
+          };
+          res.render("adminDashboard.ejs", data);
+      } else {
+          res.redirect("/adminLogin");
+      }
+
+  } catch (err) {
+      console.error(err);
+  }
 });
 
 router.get("/adminAddAccounts", (req, res) => {

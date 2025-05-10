@@ -1,0 +1,37 @@
+<%- include("partials/header(login).ejs"); %>
+<link href="/styles/calculateEwaste.css" rel="stylesheet">
+
+<div class="px-4 py-5 text-center hero">
+    <div class="heroContent">
+        <h1 class="display-5 fw-bold text-body-emphasis heroTitle">Calculate E-waste</h1>
+    </div>
+</div>
+
+<div id="itemForm" class="recycleForm">
+    <div class="formContainer">
+        <div class="title">
+            <p class="title1">Calculate E-waste Value</p>
+        </div>
+    </div>
+    <div id="testContainer">
+        <label class="left">Item</label>
+        <label class="right">Qty</label><br>
+        <div class="item" >
+            <select id="item1" onchange="updateDropdowns()" name="item" required>
+                <option value="">--SELECT--</option>
+            </select>
+            <input type="number" min="1" class="qty" name="quantity" value="1" required>
+        </div>
+    </div>
+    <div id="result" style="text-align:center; margin-top:20px; font-weight:bold;">
+        Estimated E-waste value: 
+    </div>
+    <div class="buttons">
+        <button type="button" class="addItem" id="addItemBtn">Add Item</button>
+        <button type="button" class="next" id="itemNext">Next</button>
+    </div>
+</div>
+
+<%- include("partials/footer.ejs"); %>
+
+<script src="/scripts/calculateEwaste.js"></script>
