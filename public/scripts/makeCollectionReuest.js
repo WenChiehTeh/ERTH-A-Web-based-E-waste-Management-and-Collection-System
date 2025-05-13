@@ -107,21 +107,35 @@ function isDate7DaysOrMoreAfterToday(dateInput) {
 //button to go from items page to date page
 $("#itemNext").on("click", function (event) {
     event.preventDefault();
-  
+
     var isPageValid = true;
-  
+
+    // Validate dropdowns
     dropdowns.forEach(i => {
-      const element = $(i);
-      const domElement = element[0];
-  
-      if (!domElement.checkValidity()) {
-        isPageValid = false;
-        domElement.reportValidity();
-      }
+        const element = $(i);
+        const domElement = element[0];
+
+        if (!domElement.checkValidity()) {
+            isPageValid = false;
+            domElement.reportValidity();
+        }
     });
-  
+
+    // Validate all quantity inputs
+    $(".qty").each(function () {
+        const value = parseInt($(this).val(), 10);
+
+        if (isNaN(value) || value <= 0) {
+            isPageValid = false;
+            this.setCustomValidity("Quantity must be more than 0.");
+            this.reportValidity();
+        } else {
+            this.setCustomValidity(""); // Clear previous message
+        }
+    });
+
     if (isPageValid) {
-        $("#itemForm").slideUp(500, function() {
+        $("#itemForm").slideUp(500, function () {
             $("#dateForm").slideDown(750);
         });
     }

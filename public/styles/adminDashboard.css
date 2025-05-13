@@ -10,7 +10,8 @@ body {
 }
 
 .sidebar {
-    height: 180vh;
+    height: 100vh;
+    position: fixed !important;
 }
 
 .formContainer {
@@ -26,6 +27,7 @@ body {
     width: 80vw;
     max-width: 1500px;
     margin-top: 75px;
+    margin-left: 250px;
 }
 
 .row1 {

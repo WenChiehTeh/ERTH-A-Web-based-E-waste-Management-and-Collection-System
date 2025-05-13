@@ -12,6 +12,11 @@ body {
     justify-content: center;
 }
 
+.sidebar {
+    height: 100vh;
+    position: fixed !important;
+}
+
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -25,6 +30,7 @@ body {
     background-color: #FEFAE0;
     padding: 20px;
     overflow-y: auto;
+    margin-left: 450px;
 }
 
 #accountsTable {

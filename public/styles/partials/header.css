@@ -24,3 +24,12 @@ header {
     margin: 0px 50px 0px 0px;
     color: white;
 }
+
+.logo {
+    width: 100px;
+    border-radius: 15px;;
+}
+
+.heroTitle {
+    margin-bottom: 40px;
+}

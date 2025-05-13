@@ -88,7 +88,7 @@ function renderRequests(requests) {
     card.innerHTML = `
       <div class="collectionDesc span2">ID: ${req.id}</div>
       <div class="collectionDesc">Type: ${req.type}</div>
-      <div class="collectionDesc">Date: ${req.date}</div>
+      <div class="collectionDesc">Date: ${formattedDate}</div>
       <button onclick="viewItems(${req.id})" class="viewItemBtn">View Items</button>
       <button onclick="showRescheduleModal(${req.id})" class="rescheduleBtn">Reject</button>
       <button onclick="showApproveModal(${req.id})" class="approveBtn">Approve</button>

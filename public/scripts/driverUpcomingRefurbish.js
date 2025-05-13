@@ -1,4 +1,4 @@
-$("add").addClass("current");
+$(".add").addClass("current");
 
 async function fetchUpcomingRequests() {
     try {
